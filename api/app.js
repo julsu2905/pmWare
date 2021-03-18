@@ -41,7 +41,7 @@ app.options('*', cors());
 
 //ROUTES
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/api', usersRouter);
 
 
 
