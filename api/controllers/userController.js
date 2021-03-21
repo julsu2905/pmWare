@@ -16,22 +16,8 @@ const filterObj = (obj, ...allowedFields) => {
 	  if(allowedFields.includes(el)) newObj[el] = obj[el];
 	});
 	return newObj;
-  }
-/* exports.createUser = catchAsync(async (req, res, next) => {
-	const { email, password, confirmPassword } = req.body;
-	await User.create({
-		email: email,
-		password: password,
-		passwordConfirm: confirmPassword,
-		bio:'',
-		projects:[]
-	});
-	res.redirect('/login');
-}); */
-exports.getMe = (req, res, next) => {
-	req.params.id = req.user.id;
-	next();
-};
+}
+exports.getUser = factory.getOne(User);
 
 exports.updateMe = catchAsync(async (req, res, next) => {
 	const decoded = await promisify(jwt.verify)(
@@ -40,14 +26,6 @@ exports.updateMe = catchAsync(async (req, res, next) => {
 	);
 	console.log(decoded);
 
-	if (req.body.password || req.body.passwordConfirm) {
-		return next(
-			new AppError(
-				"This route is not for password updates. Please updateMyPassword",
-				400
-			)
-		);
-	}
 	//2) Filterer out unwanted fields names that are not allowed to be updated
 	const filteredBody = filterObj(req.body, "email");
 	const updateUser = await User.findByIdAndUpdate(decoded.id, filteredBody, {
@@ -73,5 +51,5 @@ exports.deleteMe = catchAsync(async (req, res, next) => {
 	});
   });
 
-//Get All UserAdmin
+//Get All User
 exports.getAllUsers = factory.getAll(User);

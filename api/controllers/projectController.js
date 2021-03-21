@@ -87,7 +87,7 @@ exports.addMember = catchAsync(async (req, res, next) => {
 		);
 	}
 
-	res.status(201).json({
+	res.status(200).json({
 		status: "success",
 		data: {
 			data: project,
@@ -106,6 +106,27 @@ exports.deleteProject = catchAsync(async (req, res, next) => {
 	res.redirect("/home");
 });
 
-exports.getAllProjects = factory.getAll(Project);
+exports.getUserProjects = catchAsync(async (req, res, next) => {
+	const decoded = await promisify(jwt.verify)(
+		req.cookies.jwt,
+		process.env.JWT_SECRET
+	);
 
+	const user = await User.findById(decoded.id);
+	const limit = 20;
+	const page = +req.query.page * 1 || 1;
+	const totalItems = await Project.find({
+		_id: {
+			$in: user.myProjects,
+		}, active: true,
+	}).countDocuments();
+
+	res.status(200).json({
+		status: "success",
+		data: {
+			data: userProjects,
+		},
+	});
+
+});
 exports.getProject = factory.getOne(Project);
