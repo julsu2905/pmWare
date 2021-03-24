@@ -1,0 +1,188 @@
+@import url("https://fonts.googleapis.com/css?family=Source+Code+Pro:200");
+/* body {
+	
+	background-image: url("https://media.istockphoto.com/vectors/cute-siberian-husky-dog-paws-up-over-wall-vector-illustration-vector-id1178218677?b=1&k=6&m=1178218677&s=612x612&w=0&h=AorWckQn4uEPqX9JusJ0NT6xegjYrKTo63Mlid7IaQM=");
+	background-size: 50% 1300px;
+	
+
+} */
+
+.all-page {
+
+	align-items: center;
+	justify-content: center;
+	position: absolute;
+	margin: auto;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+
+	border-radius: 3px;
+}
+.container {
+	background-color: #e3f2fd;
+}
+.body-content {
+	margin-top: 50px;
+}
+
+.menu-left {
+	float: left;
+	width: 33%;
+	padding-left: 10%;
+	border-right: 1px solid gray;
+	height: 550px;
+}
+.mid-content {
+	float: left;
+	width: 37%;
+	color: black;
+}
+.mid-content a {
+	color: black;
+	margin-left : 10px;
+	font-weight: bold;
+}
+.mid-content a:visited {
+	color: white;
+	margin-left : 10px;
+}
+
+h5 {
+	margin-left: 30%;
+}
+
+.menu-right {
+	float: right;
+	width: 30%;
+	padding-left: 4%;
+	border-left: 1px solid gray;
+	height: 550px;
+}
+.menu-right a {
+	color: black;
+	margin-left : 10px;
+	font-weight: bold;
+}
+.menu-right a:visited {
+	color: white;
+	margin-left : 10px;
+}
+.homepageGif img{
+	border-radius: 50%;
+	margin-top: 100px;
+	width: 300px;
+	height: 300px;
+}
+.btn.btn-light {
+	text-align: left;
+	width: 200px;
+	margin-top: 10px;
+	margin-left: 30%;
+}
+.btn.btn-secondary {
+	float: right;
+	margin-right: 15%;
+}
+
+.modal-header {
+	background-color: #a9f5f2;
+}
+.logo img {
+	width: 100px;
+	height: 90px;
+}
+.logo {
+	padding-left: 15%;
+}
+.modal-dialog {
+	margin-top: 10px;
+}
+
+marquee {
+	animation-duration: 3s;
+}
+h5 {
+	width: 1000px;
+	margin-left: -5px;
+}
+
+.modal-body input {
+	margin-top: 10px;
+}
+
+/* sidebar */
+.sidenav {
+	height: 100%;
+	width: 0;
+	position: fixed;
+	z-index: 1;
+	top: 0;
+	left: 0;
+	background-color: #111;
+	overflow-x: hidden;
+	transition: 0.5s;
+	padding-top: 60px;
+}
+
+.sidenav a {
+	padding: 8px 8px 8px 32px;
+	text-decoration: none;
+	font-size: 16px;
+	color: #818181;
+	display: block;
+	transition: 0.3s;
+}
+
+.sidenav a:hover {
+	color: #f1f1f1;
+}
+
+.sidenav .closebtn {
+	position: absolute;
+	top: 0;
+	right: 25px;
+	font-size: 36px;
+	margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+	.sidenav {
+		padding-top: 15px;
+	}
+	.sidenav a {
+		font-size: 16px;
+	}
+}
+.avatar {
+	text-align: center;
+}
+.avatar img {
+	width: 100px;
+	height: 100px;
+	align-items: center;
+}
+.btn-group button {
+	background: none;
+	border: none;
+	outline: none;
+	border-radius: 3px;
+	color: blue;
+}
+/* //css dong ho */
+.gifClock img{
+	border-radius: 50%;
+	width: 200px;
+	height: 200px;
+	margin-top: 50px;
+	transition: (width 2s, height 2s, transform 2s);
+}
+.gifClock img:hover{
+	width: 300px;
+  height: 300px;
+  transform: rotate(180deg);
+}
+th {
+	text-align: center;
+}
