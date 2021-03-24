@@ -1,0 +1,24 @@
+.custom-header .navigator {
+  background: #84dd15;
+  color: white;
+  font-size: 13px;
+  line-height: 22px;
+  text-transform: uppercase;
+}
+
+.custom-header .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item:hover {
+  color: white;
+  border-bottom: 2px solid white;
+}
+
+.custom-header .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item:hover, .ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu:hover a{
+    color: white;
+    border-bottom: 2px solid white;
+}
+
+.custom-header .nav-wrapper{
+  height: 30px;
+}
+.custom-header .navigator{
+  height: 100%;
+}
