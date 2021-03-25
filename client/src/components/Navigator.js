@@ -36,8 +36,9 @@ const Navigator = () => {
           </Menu>
         </Col>
         <Col className="logo" offset={2} span={3}>
-          <Link onClick={()=> history.push('/home')} to="/home">
-            <img key="home"
+          <Link onClick={() => history.push("/home")} to="/home">
+            <img
+              key="home"
               alt="logo-home"
               width="90"
               height="80"
