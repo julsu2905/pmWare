@@ -17,8 +17,8 @@ const Navigator = () => {
     setCurrent(e.key);
     history.push(`/${e.key}`);
   };
-  const onSearch = (e, value) => {
-    console.log(value);
+  const onSearch = (e, val) => {
+    console.log("search", e, val);
   };
   return (
     <Row className="nav-wrapper">
@@ -36,8 +36,8 @@ const Navigator = () => {
           </Menu>
         </Col>
         <Col className="logo" offset={2} span={3}>
-          <Link to="/home">
-            <img
+          <Link onClick={()=> history.push('/home')} to="/home">
+            <img key="home"
               alt="logo-home"
               width="90"
               height="80"
@@ -45,8 +45,13 @@ const Navigator = () => {
             ></img>
           </Link>
         </Col>
-        <Col span={4}>
-          <Search placeholder="Search..." onSearch={onSearch} allowClear />
+        <Col className="search-bar-wrapper" span={4}>
+          <Search
+            className="search-bar"
+            placeholder="Search..."
+            onSearch={onSearch}
+            allowClear
+          />
         </Col>
         <Col span={8} className="right-nav">
           <Menu

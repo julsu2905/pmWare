@@ -21,3 +21,6 @@
 .header-wrapper .nav-wrapper .navigator .ant-menu-item:hover ,.header-wrapper .nav-wrapper .navigator .ant-menu-item-selected {
   border-bottom: 2px solid #62A5E8 ;
 }
+.header-wrapper .search-bar{
+  margin-top: 20px;
+}
