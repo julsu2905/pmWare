@@ -4,7 +4,7 @@ import { Col, Menu, Row, Input } from "antd";
 import {
   HomeOutlined,
   UserOutlined,
-  ShoppingCartOutlined,
+  UserAddOutlined,
 } from "@ant-design/icons";
 import "./component-css/Navigator.css";
 const { Search } = Input;
@@ -62,12 +62,11 @@ const Navigator = () => {
             mode="horizontal"
           >
             <Menu.Item key="searchbar"></Menu.Item>
-            <Menu.Item key="history">Kiểm tra Đơn hàng</Menu.Item>
             <Menu.Item key="login" icon={<UserOutlined />}>
               Đăng nhập
             </Menu.Item>
-            <Menu.Item key="cart" icon={<ShoppingCartOutlined />}>
-              Giỏ hàng
+            <Menu.Item key="register" icon={<UserAddOutlined />}>
+              Đăng ký
             </Menu.Item>
           </Menu>
         </Col>
