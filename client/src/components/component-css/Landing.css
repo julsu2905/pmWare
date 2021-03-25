@@ -1,0 +1,17 @@
+.content-wrapper h2,h3{
+    margin: 0;
+    display: inline-flex;
+    font-weight: 700;
+    color: white;
+    font-family: cursive;
+}
+.content-wrapper h2{
+    font-size: 36px;
+}
+.content-wrapper h3{
+    font-size: 24px;
+    color : #000;
+}
+.content-wrapper .banner-wrapper{
+    margin-top: 15px;
+}
