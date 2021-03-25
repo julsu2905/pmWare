@@ -1,4 +1,7 @@
-.ant-layout-header,
+.ant-layout-header{
+  height: 100px;
+  background: #FFF;
+}
 .ant-layout-footer {
   color: #fff;
   background: #7dbcea;
@@ -8,7 +11,7 @@
   line-height: 1.5;
 }
 .ant-layout-content {
-  min-height: 300px;
+  min-height: 800px;
   color: #fff;
   line-height: 120px;
   background: rgba(16, 142, 233, 1);
