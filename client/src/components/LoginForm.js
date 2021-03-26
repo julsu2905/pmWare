@@ -16,7 +16,7 @@ const LoginForm = () => {
             src="./images/login-logo2.gif"
             alt="login-logo"
           ></img>
-          WELCOME
+          LOGIN
         </h1>
         <Form
           name="normal_login"
