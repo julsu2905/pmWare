@@ -1,13 +1,23 @@
-import { Form, Col, Row } from "antd";
+import { Form, Col, Row, Input, Button, Checkbox } from "antd";
+import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import React, { useState } from "react";
-
+import "./component-css/LoginForm.css";
 const LoginForm = () => {
   const onFinish = (values) => {
     console.log("Received values of form: ", values);
   };
   return (
     <Row className="container">
-      <Col className="login-form-wrapper" span={8}>
+      <Col offset={8} className="login-form-wrapper" span={8}>
+        <h1>
+          <img
+            width="90"
+            height="100"
+            src="./images/login-logo2.gif"
+            alt="login-logo"
+          ></img>
+          WELCOME
+        </h1>
         <Form
           name="normal_login"
           className="login-form"
@@ -15,10 +25,15 @@ const LoginForm = () => {
             remember: true,
           }}
           onFinish={onFinish}
+          size="large"
         >
           <Form.Item
             name="username"
             rules={[
+              {
+                type: "email",
+                message: "The input is not valid E-mail!",
+              },
               {
                 required: true,
                 message: "Please input your Username!",
