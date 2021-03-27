@@ -55,6 +55,7 @@ exports.logout = (req, res) => {
 //Login
 exports.login = catchAsync(async (req, res, next) => {
 	const { email, password } = req.body;
+	
 	//check if email & password exists
 	if (!email || !password) {
 		return next(new AppError("Please provide email and password!", 400));

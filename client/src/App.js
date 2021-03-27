@@ -24,7 +24,7 @@ function App() {
           <Route exact path="/">
             <Landing />
           </Route>
-          <Route exact path="/">
+          <Route exact path="/login">
             <LoginForm />
           </Route>
         </Content>
