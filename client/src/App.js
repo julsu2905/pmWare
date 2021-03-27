@@ -19,16 +19,16 @@ function App() {
           <Navigator />
         </Header>
         <Content className="content-wrapper">
-          <Route exact path="/home">
+          <Route path="/home">
             <Home />
           </Route>
           <Route exact path="/">
             <Landing />
           </Route>
-          <Route exact path="/login">
+          <Route path="/login">
             <LoginForm />
           </Route>
-          <Route exact path="/register">
+          <Route path="/register">
             <RegisterForm />
           </Route>
         </Content>

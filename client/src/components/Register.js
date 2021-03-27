@@ -2,52 +2,19 @@ import React, { useState } from "react";
 import {
   Form,
   Input,
-  Cascader,
-  Select,
   Row,
   Col,
   Checkbox,
   Button,
-  AutoComplete,
+  message
 } from "antd";
 import "./component-css/Register.css";
-import {FormOutlined} from "@ant-design/icons";
+import { FormOutlined } from "@ant-design/icons";
+import axios from "axios"
+import {useHistory} from "react-router-dom"
 
-const { Option } = Select;
-const residences = [
-  {
-    value: "zhejiang",
-    label: "Zhejiang",
-    children: [
-      {
-        value: "hangzhou",
-        label: "Hangzhou",
-        children: [
-          {
-            value: "xihu",
-            label: "West Lake",
-          },
-        ],
-      },
-    ],
-  },
-  {
-    value: "jiangsu",
-    label: "Jiangsu",
-    children: [
-      {
-        value: "nanjing",
-        label: "Nanjing",
-        children: [
-          {
-            value: "zhonghuamen",
-            label: "Zhong Hua Men",
-          },
-        ],
-      },
-    ],
-  },
-];
+
+
 const formItemLayout = {
   labelCol: {
     xs: {
@@ -81,9 +48,15 @@ const tailFormItemLayout = {
 
 const RegisterForm = () => {
   const [form] = Form.useForm();
+  const history= useHistory();
 
-  const onFinish = (values) => {
-    console.log("Received values of form: ", values);
+
+  const register = (values) => {
+    const url = "http://127.0.0.1:9696/api/user"
+    axios.post(url, values).then((res) => {
+      message.success("Register successfully!")
+      setTimeout(() => { history.push('/login') }, 2000)
+    })
   };
 
 
@@ -106,12 +79,12 @@ const RegisterForm = () => {
   return (
     <Row className="register-container">
       <Col className="register-form-wrapper" offset={6} span={10}>
-      <h1 id='register-title'><FormOutlined /> Register Form</h1>
+        <h1 id='register-title'><FormOutlined /> Register Form</h1>
         <Form
           {...formItemLayout}
           form={form}
           name="register"
-          onFinish={onFinish}
+          onFinish={register}
           initialValues={{
             residence: ["zhejiang", "hangzhou", "xihu"],
             prefix: "86",
@@ -164,7 +137,7 @@ const RegisterForm = () => {
           </Form.Item>
 
           <Form.Item
-            name="confirm"
+            name="passwordConfirm"
             label="Confirm Password"
             dependencies={["password"]}
             hasFeedback
@@ -191,7 +164,7 @@ const RegisterForm = () => {
             <Input.Password />
           </Form.Item>
 
-          
+
           <Form.Item
             name="agreement"
             valuePropName="checked"
