@@ -6,7 +6,7 @@ const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const cors = require('cors');
 const session = require('express-session');
-var usersRouter = require('./routes/users');
+const apiRouter = require('./routes/apis');
 const AppError = require('./utils/appError');
 
 const globalErrorHandler = require('./controllers/errorController');
@@ -39,7 +39,7 @@ app.use(cors());
 app.options('*', cors());
 
 //ROUTES
-app.use('/api', usersRouter);
+app.use('/api', apiRouter);
 
 // error handler
 app.use('*', (req, res, next) => {
