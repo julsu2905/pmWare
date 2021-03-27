@@ -10,6 +10,13 @@
 .ant-layout-footer {
   line-height: 1.5;
 }
+.ant-layout-footer h1{
+  text-align: center;
+  color : pink;
+  font-weight: bolder;
+  font-family: cursive;
+}
+
 .ant-layout-content {
   min-height: 900px;
   color: #fff;
