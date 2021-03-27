@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import Navigator from "./components/Navigator";
 import Home from "./components/Home";
 import Landing from "./components/Landing";
-import LoginForm from './components/LoginForm';
+import LoginForm from "./components/LoginForm";
 const { Header, Footer, Sider, Content } = Layout;
 
 function App() {
@@ -28,7 +28,9 @@ function App() {
             <LoginForm />
           </Route>
         </Content>
-        <Footer>Footer</Footer>
+        <Footer>
+          <h1>CONG TY TRACH NHIEM HUU HAN 10 THANH VIEN</h1>
+        </Footer>
       </Layout>
 
       {/*       <Route exact path="/login">
