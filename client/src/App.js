@@ -6,7 +6,8 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import Navigator from "./components/Navigator";
 import Home from "./components/Home";
 import Landing from "./components/Landing";
-import LoginForm from "./components/LoginForm";
+import LoginForm from './components/LoginForm';
+import RegisterForm from "./components/Register";
 const { Header, Footer, Sider, Content } = Layout;
 
 function App() {
@@ -26,6 +27,9 @@ function App() {
           </Route>
           <Route exact path="/login">
             <LoginForm />
+          </Route>
+          <Route exact path="/register">
+            <RegisterForm />
           </Route>
         </Content>
         <Footer>
