@@ -9,20 +9,13 @@ import { useHistory } from "react-router-dom"
 
 const LoginForm = () => {
   const histor = useHistory();
-  const handleChange = (e) => {
-    this.setState({
-      [e.target.name]: e.target.value
-    })
-  }
   const login = (values) => {
     const url = "http://127.0.0.1:9696/api/login"
     console.log(values)
     axios.post(url, values).then(res => {
       if (res.data.status === "success") {
         message.success('Login successful!')
-        setTimeout(() => {
-          histor.push('/')
-        }, 2000)
+        setTimeout(() => {histor.push('/')}, 2000)
        
       }
     }).catch(err => {
