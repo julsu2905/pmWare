@@ -1,18 +1,22 @@
 .ant-layout-header{
-  height: 100px;
+  height: 80px;
   background: #FFF;
 }
 .ant-layout-footer {
   color: #fff;
-  background: #7dbcea;
+  background: #336b87;
 }
 
 .ant-layout-footer {
-  line-height: 1.5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
 }
 .ant-layout-footer h1{
-  text-align: center;
-  color : pink;
+  font-size: 1em;
+  padding-top: 5px;
+  color : #222;
   font-weight: bolder;
   font-family: cursive;
 }
@@ -20,5 +24,14 @@
 .ant-layout-content {
   min-height: 900px;
   color: #fff;
-  background: #DDD;
+  background: rgb(243, 239, 239);
+}
+.header-wrapper{
+  position: fixed;
+  z-index: 99;
+  width: 100%;
+  
+}
+.content-wrapper{
+  margin-top: 80px;
 }
