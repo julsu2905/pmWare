@@ -83,11 +83,11 @@ exports.getAll = (Model, popOptions) =>
       .limitFields()
       .paginate();
     // const doc = await features.query.explain();
-    if(popOptions)
-    const doc = await features.query
-      .populate(popOptions);
-    else
-    const doc = await features.query;
+    if (popOptions) {
+      let doc = await features.query.populate(popOptions);
+    }
+    else { doc = await features.query; }
+
     // SEND RESPONSE
     res.status(200).json({
       status: "success",
