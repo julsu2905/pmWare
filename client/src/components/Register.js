@@ -57,25 +57,15 @@ const RegisterForm = () => {
       message.success("Register successfully!")
       setTimeout(() => { history.push('/login') }, 2000)
     })
+    .catch(err=>{
+      message.error(`Login fail!\n ${err.response.data.message}`)
+    })
   };
 
 
-  const [autoCompleteResult, setAutoCompleteResult] = useState([]);
+  
 
-  const onWebsiteChange = (value) => {
-    if (!value) {
-      setAutoCompleteResult([]);
-    } else {
-      setAutoCompleteResult(
-        [".com", ".org", ".net"].map((domain) => `${value}${domain}`)
-      );
-    }
-  };
-
-  const websiteOptions = autoCompleteResult.map((website) => ({
-    label: website,
-    value: website,
-  }));
+ 
   return (
     <Row className="register-container">
       <Col className="register-form-wrapper" offset={6} span={10}>
