@@ -1,33 +1,34 @@
 import { Form, Col, Row, Input, Button, Checkbox, message } from "antd";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import React, { useState } from "react";
-import axios from "axios"
+import axios from "axios";
+import cookie from "react-cookie"
 import "./component-css/LoginForm.css";
-import { useHistory } from "react-router-dom"
-
-
+import { useHistory } from "react-router-dom";
 
 const LoginForm = () => {
   const histor = useHistory();
+
   const login = (values) => {
-    const url = "http://127.0.0.1:9696/api/login"
-    console.log(values)
-    axios.post(url, values).then(res => {
-      if (res.data.status === "success") {
-        message.success('Login successful!')
-        setTimeout(() => {histor.push('/')}, 2000)
-       
-      }
-    }).catch(err => {
-      message.error(`Login fail!\n ${err.response.data.message}`)
-    })
-
+    const url = "http://127.0.0.1:9696/api/login";
+    axios
+      .post(url, values)
+      .then((res) => {
+        console.log(res)
+        if (res.data.status === "success") {
+          message.success("Login successful!")
+          setTimeout(() => { histor.push("/") }, 2000)
+        }
+      })
+      .catch((err) => {
+        message.error(`Login fail!\n ${err.response.data.message}`)
+      })
   }
-  return (
 
+  return (
     <Row className="login-container">
       <Col offset={8} className="login-form-wrapper" span={8}>
-        <h1 id='login-title'>
+        <h1 id="login-title">
           <img
             width="90"
             height="100"
@@ -96,11 +97,11 @@ const LoginForm = () => {
             >
               Log in
             </Button>
-            Or <a href="">register now!</a>
+            Or <a href="/register">register now!</a>
           </Form.Item>
         </Form>
       </Col>
     </Row>
-  )
-}
-export default LoginForm
+  );
+};
+export default LoginForm;

@@ -76,3 +76,4 @@ typings/
 .fusebox/
 
 client/package.json
+api/package.json
