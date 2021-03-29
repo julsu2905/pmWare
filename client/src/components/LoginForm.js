@@ -8,21 +8,17 @@ import { useHistory } from "react-router-dom";
 const LoginForm = () => {
   const histor = useHistory();
   const login = (values) => {
-    const url = "http://127.0.0.1:9696/api/login";
-    console.log(values);
-    axios
-      .post(url, values)
-      .then((res) => {
-        if (res.data.status === "success") {
-          message.success("Login successful!");
-          setTimeout(() => {
-            histor.push("/");
-          }, 2000);
-        }
-      })
-      .catch((err) => {
-        message.error(`Login fail!\n ${err.response.data.message}`);
-      });
+    const url = "http://127.0.0.1:9696/api/login"
+    console.log(values)
+    axios.post(url, values).then(res => {
+      if (res.data.status === "success") {
+        message.success('Login successful!')
+        setTimeout(() => {histor.push('/')}, 2000)
+       
+      }
+    }).catch(err => {
+      message.error(`Login fail!\n ${err.response.data.message}`)
+    })
 
     const login = (values) => {
       const url = "http://127.0.0.1:9696/api/login";
