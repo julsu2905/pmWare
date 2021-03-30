@@ -17,7 +17,9 @@ const Navigator = () => {
   const handleClick = (e) => {
     console.log("click ", e.key);
     setCurrent(e.key);
-    history.push(`/${e.key}`);
+    if (e.key === '/')
+      history.push('/')
+    else history.push(`/${e.key}`)
   };
   const onSearch = (e, val) => {
     console.log("search", e, val);
@@ -48,7 +50,8 @@ const Navigator = () => {
             selectedKeys={[current]}
             mode="horizontal"
           >
-            <Menu.Item key="home" icon={<HomeOutlined />}>
+            <Menu.Item key='/'
+              icon={<HomeOutlined />}>
               Trang Chủ
             </Menu.Item>
           </Menu>
