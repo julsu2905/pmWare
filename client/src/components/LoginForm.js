@@ -2,23 +2,48 @@ import { Form, Col, Row, Input, Button, Checkbox, message } from "antd";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import React, { useState } from "react";
 import axios from "axios";
-import cookie from "react-cookie"
+import cookies from 'react-cookies'
 import "./component-css/LoginForm.css";
 import { useHistory } from "react-router-dom";
+import jwt from "jsonwebtoken";
+const { promisify } = require("util");
 
 const LoginForm = () => {
   const histor = useHistory();
+
+  const isLoggedIn = async (data) => {
+    const decoded = await promisify(jwt.verify)(
+      data.token,
+      'my-password-secret'
+    )
+    const url = "http://127.0.0.1:9696/api/user/";
+    axios.get(url + decoded.id).then(res => {
+      return true
+    }).catch(err => {
+      message.error(`You is not logged in!\n ${err.response.data.message}`)
+      return false
+    })
+  }
 
   const login = (values) => {
     const url = "http://127.0.0.1:9696/api/login";
     axios
       .post(url, values)
       .then((res) => {
-        console.log(res)
         if (res.data.status === "success") {
           message.success("Login successful!")
-          setTimeout(() => { histor.push("/") }, 2000)
+          if (isLoggedIn(res.data)) {
+            cookies.save('username', res.data.data.user.username)
+            cookies.save('email', res.data.data.user.email)
+            cookies.save('myProjects', res.data.data.user.myProjects)
+            cookies.save('userTasks', res.data.data.user.userTasks)
+          }
+          setTimeout( async() => {
+            await histor.push("/")
+            window.location.reload()
+          }, 2000)
         }
+
       })
       .catch((err) => {
         message.error(`Login fail!\n ${err.response.data.message}`)

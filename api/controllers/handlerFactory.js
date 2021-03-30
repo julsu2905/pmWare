@@ -84,10 +84,9 @@ exports.getAll = (Model, popOptions) =>
       .paginate();
     // const doc = await features.query.explain();
     if(popOptions)
-    const doc = await features.query
+    var doc = await features.query
       .populate(popOptions);
-    else
-    const doc = await features.query;
+    
     // SEND RESPONSE
     res.status(200).json({
       status: "success",
