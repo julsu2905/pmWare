@@ -15,15 +15,14 @@ function App() {
   const [currentUser, setCurrentUser] = useState(null);
   return (
     <Router>
- 
+
       <Layout>
         <Header className="header-wrapper">
           <Navigator />
         </Header>
         <Content className="content-wrapper">
           <Route path="/home">
-            <Home />
-           
+            <Project />
           </Route>
           <Route exact path="/">
             <Landing />
@@ -34,9 +33,6 @@ function App() {
           <Route path="/register">
             <RegisterForm />
           </Route>
-          <Route exact="/project">
-      <Project />
-    </Route>
         </Content>
         <Footer>
           <h1>Copyright © 2021 SweetBoyDEV</h1>
