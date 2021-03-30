@@ -22,6 +22,14 @@ const Navigator = () => {
   const onSearch = (e, val) => {
     console.log("search", e, val);
   };
+  const logout = () => {
+    var keys = Object.keys(cookies.loadAll())
+    console.log(keys)
+    keys.forEach(key => {
+      cookies.remove(key)
+    })
+    window.location.reload()
+  }
 
 
   useEffect(() => {
@@ -85,7 +93,7 @@ const Navigator = () => {
                 <Menu.Item key="profile" icon={<UserOutlined />}>
                   {username}
                 </Menu.Item>
-                <Menu.Item key="logout" icon={<UserAddOutlined />}>
+                <Menu.Item key="logout" icon={<UserAddOutlined />} onClick={logout}>
                   Đăng xuất
                 </Menu.Item>
               </>

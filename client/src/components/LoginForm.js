@@ -33,13 +33,14 @@ const LoginForm = () => {
         if (res.data.status === "success") {
           message.success("Login successful!")
           if (isLoggedIn(res.data)) {
-            cookies.save('username', res.data.data.user.username)
-            cookies.save('email', res.data.data.user.email)
-            cookies.save('myProjects', res.data.data.user.myProjects)
-            cookies.save('userTasks', res.data.data.user.userTasks)
+            var user = res.data.data.user
+            cookies.save('username', user.username)
+            cookies.save('email', user.email)
+            cookies.save('myProjects', user.myProjects)
+            cookies.save('userTasks', user.userTasks)
           }
-          setTimeout( async() => {
-            await histor.push("/")
+          setTimeout(async () => {
+            await histor.push("/home")
             window.location.reload()
           }, 2000)
         }

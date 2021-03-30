@@ -4,7 +4,7 @@ const catchAsync = require("./../utils/catchAsync");
 const AppError = require("./../utils/appError");
 const factory = require("./handlerFactory");
 
-const Project = require('../models/projectModel');``
+const Project = require('../models/projectModel'); ``
 const User = require("../models/userModel");
 
 //Create User
@@ -13,11 +13,11 @@ exports.createUser = factory.createOne(User);
 const filterObj = (obj, ...allowedFields) => {
 	const newObj = {};
 	Object.keys(obj).forEach(el => {
-	  if(allowedFields.includes(el)) newObj[el] = obj[el];
+		if (allowedFields.includes(el)) newObj[el] = obj[el];
 	});
 	return newObj;
 }
-exports.getUser = factory.getOne(User,'myProjects userTasks');
+exports.getUser = factory.getOne(User, 'myProjects userTasks');
 
 exports.updateMe = catchAsync(async (req, res, next) => {
 	const decoded = await promisify(jwt.verify)(
@@ -32,7 +32,7 @@ exports.updateMe = catchAsync(async (req, res, next) => {
 		new: true,
 		runValidators: true,
 	});
-	res.status(200).redirect(updateUser._id,{
+	res.status(200).redirect(updateUser._id, {
 		data: {
 			user: updateUser,
 		},
@@ -40,16 +40,16 @@ exports.updateMe = catchAsync(async (req, res, next) => {
 });
 exports.deleteMe = catchAsync(async (req, res, next) => {
 	const decoded = await promisify(jwt.verify)(
-	  req.cookies.jwt,
-	  process.env.JWT_SECRET
+		req.cookies.jwt,
+		process.env.JWT_SECRET
 	);
-  
+
 	await User.findByIdAndRemove(decoded.id);
 	res.status(200).json({
-	  status: 'success',
-	  data: null
+		status: 'success',
+		data: null
 	});
-  });
+});
 
 //Get All User
-exports.getAllUsers = factory.getAll(User,'myProjects userTasks');
+exports.getAllUsers = factory.getAll(User, 'myProjects userTasks');
