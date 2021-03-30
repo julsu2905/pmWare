@@ -20,7 +20,7 @@ const Project = () =>{
     </Header>
     <Content style={{ padding: '0 50px' }}>
       <Breadcrumb style={{ margin: '16px 0' }}>
-        <Breadcrumb.Item>Menu</Breadcrumb.Item>
+        <Breadcrumb.Item>Tên Project</Breadcrumb.Item>
       </Breadcrumb>
       <Layout className="site-layout-background" style={{ padding: '24px 0' }}>
         <Sider className="site-layout-background" width={200}>

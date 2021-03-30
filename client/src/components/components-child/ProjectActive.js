@@ -51,7 +51,7 @@ const ProjectActive = () => {
         }
         content={
           <p>
-            We supply a series of design principles
+            Project như hạch
           </p>
         }
         datetime={
