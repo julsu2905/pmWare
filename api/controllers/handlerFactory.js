@@ -87,7 +87,7 @@ exports.getAll = (Model, popOptions) =>
     if (popOptions) {
       doc = await features.query.populate(popOptions);
     }
-    else { doc = await features.query; }
+    else { doc = await features.query;}
 
     // SEND RESPONSE
     res.status(200).json({

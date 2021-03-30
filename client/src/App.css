@@ -23,15 +23,8 @@
 
 .ant-layout-content {
   min-height: 900px;
-  color: #fff;
-  background: rgb(243, 239, 239);
+  color: white;
+  background: #DDD;
 }
-.header-wrapper{
-  position: fixed;
-  z-index: 99;
-  width: 100%;
-  
-}
-.content-wrapper{
-  margin-top: 80px;
-}
+
+
