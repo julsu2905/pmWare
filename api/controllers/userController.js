@@ -17,7 +17,7 @@ const filterObj = (obj, ...allowedFields) => {
 	});
 	return newObj;
 }
-exports.getUser = factory.getOne(User);
+exports.getUser = factory.getOne(User,'myProjects userTasks');
 
 exports.updateMe = catchAsync(async (req, res, next) => {
 	const decoded = await promisify(jwt.verify)(
@@ -52,4 +52,4 @@ exports.deleteMe = catchAsync(async (req, res, next) => {
   });
 
 //Get All User
-exports.getAllUsers = factory.getAll(User);
+exports.getAllUsers = factory.getAll(User,'myProjects userTasks');

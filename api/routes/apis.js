@@ -10,6 +10,6 @@ router.get("/logout", authController.logout);
 
 router.route('/user').get(userController.getAllUsers).post(userController.createUser);
 router.route('/user/:id').get(userController.getUser).put(userController.updateMe).delete(userController.deleteMe);
-/* router.route('project').get(projectController.getAllProjects);
- */
+router.route('/project').get(projectController.getAllProjects);
+
 module.exports = router;

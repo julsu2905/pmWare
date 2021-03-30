@@ -39,7 +39,7 @@ function App() {
     </Route>
         </Content>
         <Footer>
-          <h1>CONG TY TRACH NHIEM HUU HAN 10 THANH VIEN</h1>
+          <h1>Copyright © 2021 SweetBoyDEV</h1>
         </Footer>
       </Layout>
 
