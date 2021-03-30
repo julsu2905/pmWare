@@ -17,11 +17,21 @@ const Navigator = () => {
   const handleClick = (e) => {
     console.log("click ", e.key);
     setCurrent(e.key);
-    history.push(`/${e.key}`);
+    if (e.key === '/')
+      history.push('/')
+    else history.push(`/${e.key}`)
   };
   const onSearch = (e, val) => {
     console.log("search", e, val);
   };
+  const logout = () => {
+    var keys = Object.keys(cookies.loadAll())
+    console.log(keys)
+    keys.forEach(key => {
+      cookies.remove(key)
+    })
+    window.location.reload()
+  }
 
 
   useEffect(() => {
@@ -40,7 +50,8 @@ const Navigator = () => {
             selectedKeys={[current]}
             mode="horizontal"
           >
-            <Menu.Item key="home" icon={<HomeOutlined />}>
+            <Menu.Item key='/'
+              icon={<HomeOutlined />}>
               Trang Chủ
             </Menu.Item>
           </Menu>
@@ -85,7 +96,7 @@ const Navigator = () => {
                 <Menu.Item key="profile" icon={<UserOutlined />}>
                   {username}
                 </Menu.Item>
-                <Menu.Item key="logout" icon={<UserAddOutlined />}>
+                <Menu.Item key="logout" icon={<UserAddOutlined />} onClick={logout}>
                   Đăng xuất
                 </Menu.Item>
               </>
