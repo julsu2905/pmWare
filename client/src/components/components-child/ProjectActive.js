@@ -1,6 +1,6 @@
 import React, { createElement, useState } from 'react';
 import ReactDOM from 'react-dom';
-import { Comment, Tooltip, Avatar } from 'antd';
+import { Comment, Tooltip, Avatar,Badge } from 'antd';
 import moment from 'moment';
 import { DislikeOutlined, LikeOutlined, DislikeFilled, LikeFilled } from '@ant-design/icons';
 import '../component-css/ProjectActive.css';
@@ -40,19 +40,25 @@ const ProjectActive = () => {
     ];
   
     return (
+      
       <Comment
+      
         actions={actions}
         author={<a>Han Solo</a>}
         avatar={
+          <Badge color="green">
           <Avatar
             src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png"
             alt="Han Solo"
           />
+          </Badge>
         }
         content={
+      
           <p>
             Project như hạch
           </p>
+      
         }
         datetime={
           <Tooltip title={moment().format('YYYY-MM-DD HH:mm:ss')}>

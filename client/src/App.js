@@ -19,6 +19,9 @@ function App() {
         <Header className="header-wrapper">
           <Navigator />
         </Header>
+        <Route path="/project">
+          <Project />
+        </Route>
         <Content className="content-wrapper">
           <Route exact path="/">
             <Landing />
@@ -33,9 +36,6 @@ function App() {
             <RegisterForm />
           </Route>
         </Content>
-        <Route path="/project">
-          <Project />
-        </Route>
         <Footer>
           <h1>Copyright © 2021 SweetBoyDEV</h1>
         </Footer>

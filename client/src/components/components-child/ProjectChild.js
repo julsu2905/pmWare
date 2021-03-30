@@ -12,16 +12,19 @@ const board = {
             id: 1,
             title: "Card title 1",
             description: "Card content"
+           
           },
           {
             id: 2,
             title: "Card title 2",
             description: "Card content"
+          
           },
           {
             id: 3,
             title: "Card title 3",
             description: "Card content"
+           
           }
         ]
       },
@@ -33,6 +36,7 @@ const board = {
             id: 9,
             title: "Card title 9",
             description: "Card content"
+           
           }
         ]
       },
@@ -44,11 +48,13 @@ const board = {
             id: 10,
             title: "Card title 10",
             description: "Card content"
+           
           },
           {
             id: 11,
             title: "Card title 11",
             description: "Card content"
+        
           }
         ]
       },
@@ -59,12 +65,13 @@ const board = {
           {
             id: 12,
             title: "Card title 12",
-            description: "Card content"
+            description: "Card content",
+           
           },
           {
             id: 13,
             title: "Card title 13",
-            description: "Card content"
+            description: "Card content",
           }
         ]
       }
@@ -94,6 +101,7 @@ const board = {
   function ProjectChild() {
     return (
       <>
+   
         <UncontrolledBoard />
       </>
     );
