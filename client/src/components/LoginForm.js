@@ -2,7 +2,7 @@ import { Form, Col, Row, Input, Button, Checkbox, message } from "antd";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import React, { useState } from "react";
 import axios from "axios";
-import cookie from "react-cookie"
+import cookie from "react-cookie";
 import "./component-css/LoginForm.css";
 import { useHistory } from "react-router-dom";
 
