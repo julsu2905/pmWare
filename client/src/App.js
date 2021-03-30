@@ -8,12 +8,14 @@ import Home from "./components/Home";
 import Landing from "./components/Landing";
 import LoginForm from './components/LoginForm';
 import RegisterForm from "./components/Register";
+import Project from "./components/Project";
 const { Header, Footer, Sider, Content } = Layout;
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
   return (
     <Router>
+ 
       <Layout>
         <Header className="header-wrapper">
           <Navigator />
@@ -21,6 +23,7 @@ function App() {
         <Content className="content-wrapper">
           <Route path="/home">
             <Home />
+           
           </Route>
           <Route exact path="/">
             <Landing />
@@ -31,6 +34,9 @@ function App() {
           <Route path="/register">
             <RegisterForm />
           </Route>
+          <Route exact="/project">
+      <Project />
+    </Route>
         </Content>
         <Footer>
           <h1>Copyright © 2021 SweetBoyDEV</h1>

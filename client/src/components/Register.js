@@ -63,9 +63,6 @@ const RegisterForm = () => {
   };
 
 
-  
-
- 
   return (
     <Row className="register-container">
       <Col className="register-form-wrapper" offset={6} span={10}>

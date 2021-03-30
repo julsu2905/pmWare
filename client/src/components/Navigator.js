@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, BrowserRouter as Router, useHistory } from "react-router-dom";
 import { Col, Menu, Row, Input } from "antd";
 import {
@@ -7,11 +7,13 @@ import {
   UserAddOutlined,
 } from "@ant-design/icons";
 import "./component-css/Navigator.css";
+import cookies from 'react-cookies'
 const { Search } = Input;
 
 const Navigator = () => {
   const history = useHistory();
   const [current, setCurrent] = useState("home");
+  const [username, setUsername] = useState("")
   const handleClick = (e) => {
     console.log("click ", e.key);
     setCurrent(e.key);
@@ -20,6 +22,14 @@ const Navigator = () => {
   const onSearch = (e, val) => {
     console.log("search", e, val);
   };
+
+
+  useEffect(() => {
+    console.log(username)
+    let localUsername = cookies.load('username')
+    if (localUsername !== undefined)
+      setUsername(localUsername);
+  })
   return (
     <Row className="nav-wrapper">
       <Router>
@@ -62,12 +72,25 @@ const Navigator = () => {
             mode="horizontal"
           >
             <Menu.Item key="searchbar"></Menu.Item>
-            <Menu.Item key="login" icon={<UserOutlined />}>
-              Đăng nhập
-            </Menu.Item>
-            <Menu.Item key="register" icon={<UserAddOutlined />}>
-              Đăng ký
-            </Menu.Item>
+            {username === "" ?
+              <>
+                <Menu.Item key="login" icon={<UserOutlined />}>
+                  Đăng nhập
+                </Menu.Item>
+                <Menu.Item key="register" icon={<UserAddOutlined />}>
+                  Đăng ký
+                </Menu.Item>
+              </> :
+              <>
+                <Menu.Item key="profile" icon={<UserOutlined />}>
+                  {username}
+                </Menu.Item>
+                <Menu.Item key="logout" icon={<UserAddOutlined />}>
+                  Đăng xuất
+                </Menu.Item>
+              </>
+            }
+
           </Menu>
         </Col>
       </Router>

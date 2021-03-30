@@ -41,7 +41,7 @@ const Landing = () => {
                 <div className="cover-content">
                   <div className="content">
                     <p>Todolist giúp các nhóm làm việc có tính hợp tác hơn và làm được
-              nhiều hơn. </p>
+              nhiều hơn. </p> 
                   </div>
                 </div>
               </div>
