@@ -9,6 +9,7 @@ import Landing from "./components/Landing";
 import LoginForm from './components/LoginForm';
 import RegisterForm from "./components/Register";
 import Project from "./components/Project";
+import UserProfile from "./components/UserProfile";
 const { Header, Footer, Sider, Content } = Layout;
 
 function App() {
@@ -21,6 +22,9 @@ function App() {
         </Header>
         <Route path="/project">
           <Project />
+        </Route>
+        <Route path="/profile">
+          <UserProfile />
         </Route>
         <Content className="content-wrapper">
           <Route exact path="/">

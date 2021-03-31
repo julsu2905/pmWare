@@ -1,19 +1,22 @@
 import React, { useState } from "react";
 import Board, { moveCard } from "@lourenci/react-kanban";
-import "../component-css/ProjectChild.css"
+import "../component-css/ProjectChild.css";
+import ProjectAddmember from './ProjectAddmember';
 
 const board = {
     columns: [
       {
         id: 1,
         title: "Planing",
+        
         cards: [
           {
             id: 1,
             title: "Card title 1",
-            description: "Card content"
-           
+            description:"card content"
           },
+         
+        
           {
             id: 2,
             title: "Card title 2",
@@ -27,6 +30,7 @@ const board = {
            
           }
         ]
+       
       },
       {
         id: 2,
@@ -76,11 +80,14 @@ const board = {
         ]
       }
     ]
+    
   };
   
   function UncontrolledBoard() {
     return (
+        
       <Board
+ 
         allowRemoveLane
         allowRenameColumn
         allowRemoveCard
@@ -89,20 +96,44 @@ const board = {
         onLaneRename={console.log}
         initialBoard={board}
         allowAddCard={{ on: "top" }}
+        
         onNewCardConfirm={draftCard => ({
           id: new Date().getTime(),
           ...draftCard
+         
         })}
         onCardNew={console.log}
+        
       />
+  
+         
     );
+    
   }
+  /* function ControlledBoard() {
+    // You need to control the state yourself.
+    const [controlledBoard, setBoard] = useState(board);
+  
+    function handleCardMove(_card, source, destination) {
+      const updatedBoard = moveCard(controlledBoard, source, destination);
+      setBoard(updatedBoard);
+    }
+  
+    return (
+      <Board onCardDragEnd={handleCardMove} disableColumnDrag>
+        {controlledBoard}
+      </Board>
+     
+    );
+  } */
+  
   
   function ProjectChild() {
     return (
       <>
-   
+    {/*     <ControlledBoard /> */}
         <UncontrolledBoard />
+        
       </>
     );
   }

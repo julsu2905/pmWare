@@ -44,7 +44,7 @@ const ProjectActive = () => {
       <Comment
       
         actions={actions}
-        author={<a>Han Solo</a>}
+        author={<a>Thanh Nguyên</a>}
         avatar={
           <Badge color="green">
           <Avatar
