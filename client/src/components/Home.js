@@ -1,13 +1,24 @@
 import {Layout} from "antd";
 import React from 'react';
+import HomeSider from "./components-child/HomeSider";
+import HomeContent from "./components-child/HomeContent";
+import './component-css/Home.css';
+
+
 const {Sider,Content} = Layout;
+
+
+
 
 const Home = () =>{
     return(
         <Layout>
-            <Sider>asdasd</Sider>
-            <Content>asdasdasd</Content>
-            <Sider>sdasdasdasd</Sider>
+            <Sider className="side-left">
+                <HomeSider/>
+            </Sider>
+            <Content>
+                <HomeContent />
+            </Content>
         </Layout>
     );
 }

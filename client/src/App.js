@@ -32,10 +32,10 @@ function App() {
           <Route path="/register">
             <RegisterForm />
           </Route>
-        </Content>
-        <Route path="/project">
+          <Route path="/project">
           <Project />
         </Route>
+        </Content>
         <Footer>
           <h1>Copyright © 2021 SweetBoyDEV</h1>
         </Footer>
