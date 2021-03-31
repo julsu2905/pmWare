@@ -1,11 +1,14 @@
 
 import React from 'react';
-import { Layout, Menu, Breadcrumb } from 'antd';
+import { Layout, Menu, Breadcrumb,Badge } from 'antd';
 import {NotificationOutlined, AreaChartOutlined,DashboardOutlined,SearchOutlined,SmileOutlined,StockOutlined,CalendarOutlined,DoubleRightOutlined,SettingOutlined } from '@ant-design/icons';
 import ProjectChild from './components-child/ProjectChild';
 import ProjectActive from './components-child/ProjectActive'
+import ProjectAddmember from './components-child/ProjectAddmember';
 const { SubMenu } = Menu;
 const { Header, Content, Footer, Sider } = Layout;
+
+
 
 
 const Project = () =>{
@@ -30,9 +33,7 @@ const Project = () =>{
             defaultOpenKeys={['sub1']}
             style={{ height: '100%' }}
           >
-    
             <Menu.Item>Menu</Menu.Item>
-            
               <Menu.Item key="1" > <DashboardOutlined /> About this board</Menu.Item>
               <Menu.Item key="2"><AreaChartOutlined /> Change background</Menu.Item>
               <Menu.Item key="3"> <SearchOutlined /> Search card</Menu.Item>
@@ -40,18 +41,17 @@ const Project = () =>{
               <Menu.Item key="5"><StockOutlined />Reports</Menu.Item>
               <Menu.Item key="6"><CalendarOutlined />Component</Menu.Item>
               <Menu.Item key="7"><SettingOutlined />Project Setting</Menu.Item>
-            <SubMenu key="sub3" icon={<DoubleRightOutlined />} title="Active">
-                <ProjectActive></ProjectActive>
+            <SubMenu key="sub3" icon={ <Badge dot  >Active</Badge>}  >
+                <ProjectActive>
+            </ProjectActive>
              </SubMenu>
              
            
           </Menu>
         </Sider>
         <ProjectChild></ProjectChild>
-       
-
-
       </Layout>
+     
     </Content>
     
     <Footer style={{ textAlign: 'center' }}>Ant Design ©2018 Created by Ant UED</Footer>
