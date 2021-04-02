@@ -9,7 +9,7 @@ const CustomColumn = (props) => {
     id: props.id,
   });
   const style = {
-    color: isOver ? "green" : undefined,
+    background: isOver ? "red" : undefined,
   };
   return (
     <Row ref={setNodeRef} style={style} className="column-content-wrapper">
