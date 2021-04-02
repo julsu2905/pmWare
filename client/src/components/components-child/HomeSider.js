@@ -21,7 +21,7 @@ const HomeSider = () => {
        console.log("1");
       };
     return(
-        <div style={{ width: 300 }}>
+        <div style={{ width: 'aotu' }}>
         {/* <Button type="primary" onClick={toggleCollapsed} style={{ marginBottom: 16 }}>
           {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined)}
           
@@ -35,12 +35,12 @@ const HomeSider = () => {
         >
           <Row>
             <Col className="avatar">
-              <Avatar size={100} icon={<UserOutlined />} />
+              <Avatar size={110} icon={<UserOutlined />} />
               
             </Col>
           </Row>
           <Row>
-            <Col offset={7} className="user">
+            <Col offset={6} span={11} className="user">
               <h1>
                   Username
               </h1>

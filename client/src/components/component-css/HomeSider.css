@@ -1,6 +1,7 @@
 .avatar{
     margin-top: 20px;
     left: 30%;
+    filter: drop-shadow(2px 2px 5px rgb(65, 65, 65));
 }
 
 .user h1{
