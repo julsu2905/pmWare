@@ -1,13 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState,useEffect } from 'react';
 import '../component-css/HomeContent.css';
-
+import axios from 'axios';
 import 'antd/dist/antd.css';
 import { PlusOutlined, UserOutlined, AntDesignOutlined } from '@ant-design/icons';
 import { Input, AutoComplete, Row, Col, Card, Button, Avatar, Tooltip} from 'antd';
 
 const HomeContent = () => {
-
-
+    useEffect(() => {
+        const url = 'http://127.0.0.1:9696/api/project';
+        const config = {
+            headers:'',
+        }
+        axios.get(url)
+    }, [])
     //Search
     function getRandomInt(max, min = 0) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -69,10 +74,6 @@ const HomeContent = () => {
             </AutoComplete>
         );
     };
-
-    //button-create
-    const [size, setSize] = useState('large');
-
 
     //member
     const Demo = () => (
@@ -194,18 +195,18 @@ const HomeContent = () => {
 
     return (
         <>
-            <Row className="search-P">
-                <Col offset={16} span={6}>
-                    <Complete />
-                </Col>
-                <Col >
-                    <Button className="btn-plus" type="primary" icon={<PlusOutlined />} size={size} />
-                </Col>
-            </Row>
-            <Row>
-                <Col offset={9}>
-                    <h1 className="project-title">
-                        Your All Project
+        <Row className="search-P">
+                    <Col offset={16} span={6}>
+                        <Complete />
+                    </Col>
+                    <Col >
+                        <Button className="btn-plus" type="primary" icon={<PlusOutlined />} size={'large'} />
+                    </Col>
+                </Row>
+                <Row>
+                    <Col offset={9}>
+                        <h1 className="project-title">
+                            Your All Project
                         </h1>
                 </Col>
             </Row>
