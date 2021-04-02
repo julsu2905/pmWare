@@ -1,9 +1,0 @@
-.ant-layout-content .ant-layout-sider {
-    width: 300px !important;
-    max-width: 400px !important;
-    min-width: 300px !important;
-    
-  }
-  .ant-layout-content .ant-layout-sider-children .ant-comment{
-      line-height: 30px;
-  }

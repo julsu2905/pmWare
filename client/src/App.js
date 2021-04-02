@@ -6,7 +6,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import Navigator from "./components/Navigator";
 import Home from "./components/Home";
 import Landing from "./components/Landing";
-import LoginForm from './components/LoginForm';
+import LoginForm from "./components/LoginForm";
 import RegisterForm from "./components/Register";
 import Project from "./components/Project";
 import UserProfile from "./components/UserProfile";
@@ -20,9 +20,6 @@ function App() {
         <Header className="header-wrapper">
           <Navigator />
         </Header>
-        <Route path="/project">
-          <Project />
-        </Route>
         <Route path="/profile">
           <UserProfile />
         </Route>
@@ -40,8 +37,8 @@ function App() {
             <RegisterForm />
           </Route>
           <Route path="/project">
-          <Project />
-        </Route>
+            <Project />
+          </Route>
         </Content>
         <Footer>
           <h1>Copyright © 2021 SweetBoyDEV</h1>

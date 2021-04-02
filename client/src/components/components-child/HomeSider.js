@@ -21,11 +21,7 @@ const HomeSider = () => {
        console.log("1");
       };
     return(
-        <div style={{ width: 300 }}>
-        {/* <Button type="primary" onClick={toggleCollapsed} style={{ marginBottom: 16 }}>
-          {React.createElement(collapsed ? MenuUnfoldOutlined : MenuFoldOutlined)}
-          
-        </Button> */}
+        <div style={{ width: '300px' }}>
         <Menu
           defaultSelectedKeys={['1']}
           defaultOpenKeys={['sub1']}

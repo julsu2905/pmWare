@@ -39,7 +39,6 @@ const LoginForm = () => {
           }
 
         }
-
       })
       .catch((err) => {
         message.error(`Login fail!\n ${err.response.data.message}`)

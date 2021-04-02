@@ -36,11 +36,15 @@ const Navigator = () => {
 
 
   useEffect(() => {
-    console.log(username)
     let localUsername = cookies.load('username')
     if (localUsername !== undefined)
+    {      
+      console.log(localUsername)
       setUsername(localUsername);
+    }
   },[username])
+  console.log(username)
+
   return (
     <Row className="nav-wrapper">
       <Router>

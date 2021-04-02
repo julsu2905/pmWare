@@ -1,0 +1,5 @@
+.ant-layout-sider{
+    flex: unset;
+    max-width: unset;
+    width: 300px !important;
+}
