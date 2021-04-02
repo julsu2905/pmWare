@@ -40,7 +40,7 @@ const Navigator = () => {
     let localUsername = cookies.load('username')
     if (localUsername !== undefined)
       setUsername(localUsername);
-  })
+  },[username])
   return (
     <Row className="nav-wrapper">
       <Router>
