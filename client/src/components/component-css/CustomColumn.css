@@ -3,6 +3,7 @@
   min-height: 300px;
   margin-top: 15px;
   margin-bottom: 30px;
+  z-index: 0;
 }
 .column-title-wrapper {
   background: rgb(44, 223, 148);

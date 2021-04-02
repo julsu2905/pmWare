@@ -13,16 +13,16 @@ const Project = () => {
         <DndContext>
           <Row className="columns-list-wrapper">
             <Col className="column-wrapper" offset={1} span={4}>
-              <CustomColumn title={"Assigned"} />
+              <CustomColumn id={'1'} title={"Assigned"} />
             </Col>
             <Col className="column-wrapper" offset={1} span={4}>
-              <CustomColumn title={"Working"} />
+              <CustomColumn  id={'2'}  title={"Working"} />
             </Col>
             <Col className="column-wrapper" offset={1} span={4}>
-              <CustomColumn title={"Pending"} />
+              <CustomColumn id={'3'}  title={"Pending"} />
             </Col>
             <Col className="column-wrapper" offset={1} span={4}>
-              <CustomColumn title={"Done"} />
+              <CustomColumn id={'4'}  title={"Done"} />
             </Col>
           </Row>
         </DndContext>

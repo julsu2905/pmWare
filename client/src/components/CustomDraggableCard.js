@@ -5,26 +5,28 @@ import "./component-css/CustomCard.css";
 
 const CustomCard = (props) => {
   const { attributes, listeners, setNodeRef, transform } = useDraggable({
-    id: "draggable",
+    id: props.id,
   });
   const style = transform
     ? {
-        transform: `translate3d(${transform.x}px, ${transform.y}px, 0)`,
+        transform: `translate3d(${transform.x}px, ${transform.y}px, 0px)`,
       }
     : undefined;
   return (
-    /* <Row className="card-content-wrapper">
+    <Row
+      ref={setNodeRef}
+      style={style}
+      {...listeners}
+      {...attributes}
+      className="card-content-wrapper"
+    >
       <Row className="card-title-wrapper">
-        <Col className="card-title"></Col>
+        <Col className="card-title">{props.title}</Col>
       </Row>
       <Row className="card-body-wrapper">
         <Col className="card-body"></Col>
       </Row>
     </Row>
-  ); */
-    <button ref={setNodeRef} style={style} {...listeners} {...attributes}>
-      {props.children}
-    </button>
   );
 };
 
