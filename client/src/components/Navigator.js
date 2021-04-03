@@ -30,8 +30,8 @@ const Navigator = () => {
     keys.forEach(key => {
       cookies.remove(key)
     })
-    window.location.reload()
     history.push('/')
+    window.location.reload()
   }
 
 
@@ -43,7 +43,7 @@ const Navigator = () => {
       setUsername(localUsername);
     }
   },[username])
-  console.log(username)
+  
 
   return (
     <Row className="nav-wrapper">
@@ -55,14 +55,14 @@ const Navigator = () => {
             selectedKeys={[current]}
             mode="horizontal"
           >
-            <Menu.Item key='/'
+            <Menu.Item key='home'
               icon={<HomeOutlined />}>
               Trang Chủ
             </Menu.Item>
           </Menu>
         </Col>
         <Col className="logo" offset={2} span={3}>
-          <Link onClick={() => history.push("/home")} to="/home">
+          <Link onClick={()=>history.push("/")} to="/">
             <img
               key="home"
               alt="logo-home"
@@ -101,9 +101,9 @@ const Navigator = () => {
                 <Menu.Item key="profile" icon={<UserOutlined />}>
                   {username}
                 </Menu.Item>
-                <Menu.Item key="logout" icon={<UserAddOutlined />} onClick={logout}>
+                {/* <Menu.Item key="logout" icon={<UserAddOutlined />} onClick={logout}>
                   Đăng xuất
-                </Menu.Item>
+                </Menu.Item> */}
               </>
             }
 

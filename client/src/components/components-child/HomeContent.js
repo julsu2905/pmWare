@@ -1,18 +1,21 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import '../component-css/HomeContent.css';
 import axios from 'axios';
 import 'antd/dist/antd.css';
 import { PlusOutlined, UserOutlined, AntDesignOutlined } from '@ant-design/icons';
-import { Input, AutoComplete, Row, Col, Card, Button, Avatar, Tooltip} from 'antd';
+import { Input, AutoComplete, Row, Col, Card, Button, Avatar, Tooltip, message } from 'antd';
+import cookies from 'react-cookies'
 
 const HomeContent = () => {
     useEffect(() => {
         const url = 'http://127.0.0.1:9696/api/project';
-        const config = {
-            headers:'',
-        }
-        axios.get(url)
+        axios.get(url, { jwt: cookies.load('jwt') }).then((response) => {
+            console.log(response)
+        }).catch((err) => {
+            message.error(`Login fail!\n ${err.response.data.message}`)
+        })
     }, [])
+    
     //Search
     function getRandomInt(max, min = 0) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -150,40 +153,42 @@ const HomeContent = () => {
                 { key: "internal-news", title: "Tin nội bộ" },
             ],
         },
-        { key: "home", title: "Project 6", items: [
-            { key: "su-menh", title: "Sứ mệnh, Tầm nhìn, Giá trị cốt lõi" },
-            { key: "shareholder", title: "Các cổ đông" },
-            { key: "history", title: "Lịch sử hình thành" },
-            { key: "organization-chart", title: "Sơ đồ tổ chức" },
-            { key: "ky-yeu", title: "Kỷ yếu 20 năm" },
-            { key: "inbound-certifications", title: " Các chứng chỉ nghiệp vụ" }
-        ] },
-        
-        
+        {
+            key: "home", title: "Project 6", items: [
+                { key: "su-menh", title: "Sứ mệnh, Tầm nhìn, Giá trị cốt lõi" },
+                { key: "shareholder", title: "Các cổ đông" },
+                { key: "history", title: "Lịch sử hình thành" },
+                { key: "organization-chart", title: "Sơ đồ tổ chức" },
+                { key: "ky-yeu", title: "Kỷ yếu 20 năm" },
+                { key: "inbound-certifications", title: " Các chứng chỉ nghiệp vụ" }
+            ]
+        },
+
+
     ];
 
 
 
 
-   /*  const [initLoading, setInitLoading] = useState(true);
-    const [loading, setLoading] = useState(false);
-    const count = 3;
-    const Data= [];
-    const list = [];
-    useEffect(() => {
-        // Update the document title using the browser API
-        getData(res => {
-            setInitLoading(false)
-            this.setState({
-              initLoading: false,
-              
-            });
-          });
-      });
-
-    const LoadItems = () => {
-
-    }; */
+    /*  const [initLoading, setInitLoading] = useState(true);
+     const [loading, setLoading] = useState(false);
+     const count = 3;
+     const Data= [];
+     const list = [];
+     useEffect(() => {
+         // Update the document title using the browser API
+         getData(res => {
+             setInitLoading(false)
+             this.setState({
+               initLoading: false,
+               
+             });
+           });
+       });
+ 
+     const LoadItems = () => {
+ 
+     }; */
 
     const [visible, setVisible] = useState(3);
     const showMoreItem = () => {
@@ -195,73 +200,73 @@ const HomeContent = () => {
 
     return (
         <>
-        <Row className="search-P">
-                    <Col offset={16} span={6}>
-                        <Complete />
-                    </Col>
-                    <Col >
-                        <Button className="btn-plus" type="primary" icon={<PlusOutlined />} size={'large'} />
-                    </Col>
-                </Row>
-                <Row>
-                    <Col offset={9}>
-                        <h1 className="project-title">
-                            Your All Project
-                        </h1>
+            <Row className="search-P">
+                <Col offset={16} span={6}>
+                    <Complete />
+                </Col>
+                <Col >
+                    <Button className="btn-plus" type="primary" icon={<PlusOutlined />} size={'large'} />
+                </Col>
+            </Row>
+            <Row>
+                <Col offset={9}>
+                    <h1 className="project-title">
+                        Your All Project
+                    </h1>
                 </Col>
             </Row>
             <Row>
                 <Col offset={2} span={22}>
 
-                        
-                        <Row >
 
-                            {menuItems.slice(0, visible).map((listItems) => {
-                                if (listItems.items.length > 0) {
-                                    return (
-                                        
-                                            <Col span={8} className="box-project">
-                                                <Card className="card-pro"
-                                                    key={listItems.key}
-                                                    title={listItems.title}
-                                                    bordered={false}
-                                                    extra={<a href="#">More</a>}
-                                                    style={{ width: 300 }}>
-                                                    {listItems.items.map((item) => {
-                                                        return (
-                                                            <Row key={item.key}>
-                                                                <Col >
-                                                                    {item.title}
-                                                                </Col>
-                                                            </Row>
-                                                        );
-                                                    })}
-                                                    <Demo />
-                                                </Card>
-                                            </Col>
-                                            
+                    <Row >
 
-                                        );
-                                    } else
-                                        return (
-                                            <></>
-                                        );
-                                })}
+                        {menuItems.slice(0, visible).map((listItems) => {
+                            if (listItems.items.length > 0) {
+                                return (
+
+                                    <Col span={8} className="box-project">
+                                        <Card className="card-pro"
+                                            key={listItems.key}
+                                            title={listItems.title}
+                                            bordered={false}
+                                            extra={<a href="#">More</a>}
+                                            style={{ width: 300 }}>
+                                            {listItems.items.map((item) => {
+                                                return (
+                                                    <Row key={item.key}>
+                                                        <Col >
+                                                            {item.title}
+                                                        </Col>
+                                                    </Row>
+                                                );
+                                            })}
+                                            <Demo />
+                                        </Card>
+                                    </Col>
 
 
+                                );
+                            } else
+                                return (
+                                    <></>
+                                );
+                        })}
 
 
 
 
-                                       
-                        </Row>
-                        
 
-                        <Row>
-                            <Col offset={9}>
-                                <button className="btn-load" onClick={showMoreItem}>Load More</button>
-                            </Col>
-                        </Row>
+
+
+                    </Row>
+
+
+                    <Row>
+                        <Col offset={9}>
+                            <button className="btn-load" onClick={showMoreItem}>Load More</button>
+                        </Col>
+                    </Row>
 
                 </Col>
             </Row>
