@@ -19,6 +19,6 @@ router
   .get(userController.getUser)
   .put(userController.updateMe)
   .delete(userController.deleteMe);
-router.route("/project").get(projectController.getUserProjects);
+router.route("/userproject").post(userController.getUserProjects);
 
 module.exports = router;

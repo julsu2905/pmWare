@@ -50,6 +50,26 @@ exports.deleteMe = catchAsync(async (req, res, next) => {
 		data: null
 	});
 });
+exports.getUserProjects = catchAsync(async (req, res, next) => {
+	const token = await req.body.jwt
+	if (token)
+		try {
+			const decoded = await promisify(jwt.verify)(
+				token,
+				process.env.JWT_SECRET
+			);
+			var user = await User.findById(decoded.id, 'myProjects userTasks')
+
+			res.status(200).json({
+				status: "success",
+				data: user,
+			});
+		}
+		catch (err) {
+			res.json(err)
+		}
+
+})
 
 //Get All User
 exports.getAllUsers = factory.getAll(User, 'myProjects userTasks');

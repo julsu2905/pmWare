@@ -111,7 +111,7 @@ exports.deleteProject = catchAsync(async (req, res, next) => {
   res.redirect("/home");
 });
 
-exports.getUserProjects = catchAsync(async (req, res, next) => {
+/* exports.getUserProjects = catchAsync(async (req, res, next) => {
   
   const decoded = await promisify(jwt.verify)(
     req.body.jwt,
@@ -119,19 +119,19 @@ exports.getUserProjects = catchAsync(async (req, res, next) => {
   );
 
   var user = await User.findById(decoded.id,'myProjects userTasks');
-  /*const limit = 20;
+  const limit = 20;
   const page = +req.query.page * 1 || 1;
   const totalItems = await Project.find({
     _id: {
       $in: user.myProjects,
     },
     active: true,
-  }).countDocuments();*/
+  }).countDocuments();
 
   res.status(200).json({
     status: "success",
     data: user,
   });
-});
+}); */
 exports.getProject = factory.getOne(Project);
 exports.getAllProjects = factory.getAll(Project);
