@@ -191,6 +191,7 @@ const HomeContent = () => {
      }; */
 
     const [visible, setVisible] = useState(3);
+    const [hiddenitem, setHiddenitem] = useState(4);
     const showMoreItem = () => {
         setVisible((prevValue) => prevValue + 3);
     };
@@ -224,7 +225,7 @@ const HomeContent = () => {
                         {menuItems.slice(0, visible).map((listItems) => {
                             if (listItems.items.length > 0) {
                                 return (
-
+                                    
                                     <Col span={8} className="box-project">
                                         <Card className="card-pro"
                                             key={listItems.key}
@@ -232,7 +233,7 @@ const HomeContent = () => {
                                             bordered={false}
                                             extra={<a href="#">More</a>}
                                             style={{ width: 300 }}>
-                                            {listItems.items.map((item) => {
+                                            {listItems.items.slice(0, hiddenitem).map((item) => {
                                                 return (
                                                     <Row key={item.key}>
                                                         <Col >
@@ -241,6 +242,7 @@ const HomeContent = () => {
                                                     </Row>
                                                 );
                                             })}
+                                            <p>...</p>
                                             <Demo />
                                         </Card>
                                     </Col>
