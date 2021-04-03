@@ -112,27 +112,25 @@ exports.deleteProject = catchAsync(async (req, res, next) => {
 });
 
 exports.getUserProjects = catchAsync(async (req, res, next) => {
+  
   const decoded = await promisify(jwt.verify)(
-    req.cookies.jwt,
+    req.body.jwt,
     process.env.JWT_SECRET
   );
 
-  const user = await User.findById(decoded.id);
-  const limit = 20;
+  var user = await User.findById(decoded.id,'myProjects userTasks');
+  /*const limit = 20;
   const page = +req.query.page * 1 || 1;
   const totalItems = await Project.find({
     _id: {
       $in: user.myProjects,
     },
     active: true,
-  }).countDocuments();
+  }).countDocuments();*/
 
   res.status(200).json({
     status: "success",
-    data: {
-      data: userProjects,
-      
-    },
+    data: user,
   });
 });
 exports.getProject = factory.getOne(Project);

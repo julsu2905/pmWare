@@ -20,14 +20,11 @@ function App() {
         <Header className="header-wrapper">
           <Navigator />
         </Header>
-        <Route path="/profile">
-          <UserProfile />
-        </Route>
         <Content className="content-wrapper">
           <Route exact path="/">
             <Landing />
           </Route>
-          <Route path="/home">
+          <Route  path="/home">
             <Home />
           </Route>
           <Route path="/login">
@@ -36,8 +33,11 @@ function App() {
           <Route path="/register">
             <RegisterForm />
           </Route>
-          <Route path="/project">
+          <Route  path="/project">
             <Project />
+          </Route>
+          <Route path="/profile">
+            <UserProfile />
           </Route>
         </Content>
         <Footer>

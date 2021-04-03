@@ -1,4 +1,5 @@
 import React, { useState} from 'react';
+import {useHistory} from 'react-router-dom'
 import { Menu, Button, Avatar, Row, Col } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import {
@@ -11,11 +12,23 @@ import {
   MailOutlined,
 } from '@ant-design/icons';
 import '../component-css/HomeSider.css';
+import cookies from 'react-cookies'
 
 const HomeSider = () => {
     const { SubMenu } = Menu;
     const [collapsed, setcollapseds] = useState(false);
+    const history = useHistory();
     
+    const logout = () => {
+      var keys = Object.keys(cookies.loadAll())
+      console.log(keys)
+      keys.forEach(key => {
+        cookies.remove(key)
+      })
+      history.push('/')
+      window.location.reload()
+    }
+
     const toggleCollapsed = () => {
        setcollapseds(true)
        console.log("1");
@@ -35,14 +48,14 @@ const HomeSider = () => {
         >
           <Row>
             <Col className="avatar">
-              <Avatar size={110} icon={<UserOutlined />} />
+              <Avatar size={100} icon={<UserOutlined />} />
               
             </Col>
           </Row>
           <Row>
             <Col offset={6} span={11} className="user">
               <h1>
-                  Username
+                  {cookies.load('username')}
               </h1>
             </Col>
           </Row>
@@ -62,9 +75,9 @@ const HomeSider = () => {
             <Menu.Item key="8">Option 8</Menu.Item>
           </SubMenu> */}
           <SubMenu key="sub2" icon={<AppstoreOutlined />} title="Edit">
-            <Menu.Item key="9">Profile</Menu.Item>
+            <Menu.Item key="9" onClick={()=>history.push('/profile')}>Profile</Menu.Item>
             <Menu.Item key="10">System</Menu.Item>
-            <Menu.Item key="11">Log Out</Menu.Item>
+            <Menu.Item key="11" onClick={logout}>Log Out</Menu.Item>
           </SubMenu>
         </Menu>
       </div>
