@@ -31,7 +31,6 @@ const Navigator = () => {
       cookies.remove(key)
     })
     window.location.reload()
-    history.push('/')
   }
 
 

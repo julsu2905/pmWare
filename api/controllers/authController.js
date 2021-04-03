@@ -34,9 +34,9 @@ const createSendToken = (user, statusCode, res) => {
 	res.status(statusCode).json({
 		status: "success",
 		token,
-		/*data: {
+		data: {
 			user,
-		},*/
+		},
 	});
 };
 
@@ -48,14 +48,14 @@ exports.logout = (req, res) => {
 		httpOnly: true,
 	});
 	res.status(200).json({
-		status: "success",
+		status: "success",	
 	});
 };
 
 //Login
 exports.login = catchAsync(async (req, res, next) => {
 	const { email, password } = req.body;
-
+	
 	//check if email & password exists
 	if (!email || !password) {
 		return next(new AppError("Please provide email and password!", 400));
@@ -102,7 +102,7 @@ exports.isLoggedIn = async (req, res, next) => {
 		} catch (err) {
 			res.redirect('/login');
 		}
-		finally {
+		finally{
 			next();
 		}
 	}
@@ -111,32 +111,6 @@ exports.isLoggedIn = async (req, res, next) => {
 };
 
 exports.protectUser = factory.protect(User);
-
-exports.validateUser = catchAsync(async (req, res, next) => {
-	if (req.body.jwt) {
-		try {
-			// 1) verify token
-			const decoded = await promisify(jwt.verify)(
-				req.body.jwt,
-				process.env.JWT_SECRET
-			);
-
-			// 2) Check if user still exists
-			const currentUser = await User.findById(decoded.id);
-			if (!currentUser) {
-				res.json({ status: "fail" ,message:"Cant find user!"});
-			}
-
-			// THERE IS A LOGGED IN USER
-			//res.locals.user = currentUser;
-			res.json({ status: "success", user: currentUser });
-		} catch (err) {
-			//return next();
-			res.json(err);
-		}
-	}
-	else res.json({ status: "fail", message:"Cant find token"});
-})
 
 //Allow user for access route
 exports.restrictTo = (...roles) => {
