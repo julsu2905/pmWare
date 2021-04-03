@@ -2,16 +2,18 @@
   height: 80px;
   background: #FFF;
 }
-.ant-layout-footer {
-  color: #fff;
-  background: #336b87;
-}
 
 .ant-layout-footer {
+  width: 100%;
+
+  position: relative;
+  bottom: 0;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: 0;
+  color: #fff;
+  background: #336b87;
 }
 .ant-layout-footer h1{
   font-size: 1em;
@@ -22,9 +24,8 @@
 }
 
 .ant-layout-content {
-  min-height: 200px;
+  
+  min-height: 100vh;
   color: white;
   background: #DDD;
 }
-
-

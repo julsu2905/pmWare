@@ -7,15 +7,15 @@ import { Input, AutoComplete, Row, Col, Card, Button, Avatar, Tooltip, message }
 import cookies from 'react-cookies'
 
 const HomeContent = () => {
-    useEffect(() => {
-        const url = 'http://127.0.0.1:9696/api/project';
-        axios.get(url, { jwt: cookies.load('jwt') }).then((response) => {
-            console.log(response)
+    useEffect( () => {
+        const url = 'http://127.0.0.1:9696/api/userproject';
+        axios.post(url, { jwt: cookies.load('jwt') }).then(res=>{
+            console.log(res.data)
         }).catch((err) => {
             message.error(`Login fail!\n ${err.response.data.message}`)
         })
     }, [])
-    
+
     //Search
     function getRandomInt(max, min = 0) {
         return Math.floor(Math.random() * (max - min + 1)) + min;

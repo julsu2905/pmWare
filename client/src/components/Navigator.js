@@ -30,7 +30,6 @@ const Navigator = () => {
     keys.forEach(key => {
       cookies.remove(key)
     })
-    history.push('/')
     window.location.reload()
   }
 

@@ -5,39 +5,44 @@ import axios from "axios";
 import cookies from "react-cookies";
 import "./component-css/LoginForm.css";
 import { useHistory } from "react-router-dom";
+import jwt from "jsonwebtoken";
+const { promisify } = require("util");
 
 const LoginForm = () => {
   const histor = useHistory();
 
-  const validUser = async (url) => {
-    const res = await axios.post(url + 'validUser', { jwt: cookies.load('jwt') })
-      .catch(err => {
-        message.error(`Valid fail!\n ${err}`)
-        return { status: "fail" }
-      })
-    message.success("Valid user successful!")
-    return res.data
+  const isLoggedIn = async (data) => {
+    const decoded = await promisify(jwt.verify)(
+      data.token,
+      'my-password-secret'
+    )
+    const url = "http://127.0.0.1:9696/api/user/";
+    axios.get(url + decoded.id).then(res => {
+      return true
+    }).catch(err => {
+      message.error(`You is not logged in!\n ${err.response.data.message}`)
+      return false
+    })
   }
 
   const login = (values) => {
-    const url = "http://127.0.0.1:9696/api/";
+    const url = "http://127.0.0.1:9696/api/login";
     axios
-      .post(url + 'login', values)
-      .then(async (res) => {
+      .post(url, values)
+      .then((res) => {
         if (res.data.status === "success") {
           message.success("Login successful!")
-          cookies.save('jwt', res.data.token)
-
-          const valided = await validUser(url);
-
-          if (valided.status === "success") {
-            cookies.save('username', valided.user.username)
-            setTimeout(async () => {
-              await histor.push("/home")
-              window.location.reload()
-            }, 2000)
+          if (isLoggedIn(res.data)) {
+            var user = res.data.data.user
+            cookies.save('username', user.username)
+            cookies.save('email', user.email)
+            cookies.save('myProjects', user.myProjects)
+            cookies.save('userTasks', user.userTasks)
           }
-
+          setTimeout(async () => {
+            await histor.push("/home")
+            window.location.reload()
+          }, 2000)
         }
       })
       .catch((err) => {
