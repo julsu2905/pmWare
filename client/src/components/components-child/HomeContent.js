@@ -29,7 +29,7 @@ const HomeContent = () => {
                 return {
                     value: category,
                     label: (
-                        <div
+                        <div 
                             style={{
                                 display: 'flex',
                                 justifyContent: 'space-between',
@@ -56,7 +56,7 @@ const HomeContent = () => {
 
         const handleSearch = (value) => {
             setOptions(value ? searchResult(value) : []);
-        };
+        };  
 
         const onSelect = (value) => {
             console.log('onSelect', value);
@@ -92,9 +92,6 @@ const HomeContent = () => {
 
         </>
     );
-
-
-
     const menuItems = [
         {
             key: "introduction",
@@ -163,12 +160,7 @@ const HomeContent = () => {
                 { key: "inbound-certifications", title: " Các chứng chỉ nghiệp vụ" }
             ]
         },
-
-
     ];
-
-
-
 
     /*  const [initLoading, setInitLoading] = useState(true);
      const [loading, setLoading] = useState(false);
@@ -195,10 +187,6 @@ const HomeContent = () => {
     const showMoreItem = () => {
         setVisible((prevValue) => prevValue + 3);
     };
-
-
-
-
     return (
         <>
             <Row className="search-P">
@@ -218,14 +206,10 @@ const HomeContent = () => {
             </Row>
             <Row>
                 <Col offset={2} span={22}>
-
-
                     <Row >
-
                         {menuItems.slice(0, visible).map((listItems) => {
                             if (listItems.items.length > 0) {
-                                return (
-                                    
+                                return (     
                                     <Col span={8} className="box-project">
                                         <Card className="card-pro"
                                             key={listItems.key}
@@ -246,41 +230,20 @@ const HomeContent = () => {
                                             <Demo />
                                         </Card>
                                     </Col>
-
-
                                 );
                             } else
                                 return (
                                     <></>
                                 );
                         })}
-
-
-
-
-
-
-
                     </Row>
-
-
                     <Row>
                         <Col offset={9}>
                             <button className="btn-load" onClick={showMoreItem}>Load More</button>
                         </Col>
                     </Row>
-
                 </Col>
             </Row>
-
-
-
-
-
-
-
-
-
         </>
     );
 };

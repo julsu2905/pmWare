@@ -44,10 +44,6 @@ function App() {
           <h1>Copyright © 2021 SweetBoyDEV</h1>
         </Footer>
       </Layout>
-
-      {/*       <Route exact path="/login">
-        <LoginForm />
-      </Route> */}
     </Router>
   );
 }

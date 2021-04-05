@@ -60,16 +60,6 @@ render(){
 }
 }
 
-/* const mapStatetoProps=(state)=>{
-    return{
-        user_id:state.user.userDetails.userid,
-        username:state.user.userDetails.username,
-       email:state.user.email,
-       profileImage: state.user.profileImage,
-       msg:state.user.msg
-    }
-   }
-    */
-   
+
 
    export default UserProfile;

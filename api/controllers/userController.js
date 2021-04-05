@@ -58,7 +58,7 @@ exports.getUserProjects = catchAsync(async (req, res, next) => {
 				token,
 				process.env.JWT_SECRET
 			);
-			var user = await User.findById(decoded.id, 'myProjects userTasks')
+			var user = await User.findById(decoded.id, 'myProjects userTasks').populate('myProjects userTasks')
 
 			res.status(200).json({
 				status: "success",
