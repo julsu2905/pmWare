@@ -7,6 +7,8 @@ const projectController = require("../controllers/projectController");
 
 router.post("/login", authController.login);
 router.get("/logout", authController.logout);
+router.post('/validUser',authController.validateUser);
+
 
 router
   .route("/user")
@@ -17,6 +19,8 @@ router
   .get(userController.getUser)
   .put(userController.updateMe)
   .delete(userController.deleteMe);
+router
+  .route("/username").post(userController.getUsername)
 router.route("/userproject").post(userController.getUserProjects);
 
 module.exports = router;

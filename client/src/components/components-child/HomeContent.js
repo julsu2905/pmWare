@@ -3,17 +3,18 @@ import '../component-css/HomeContent.css';
 import axios from 'axios';
 import 'antd/dist/antd.css';
 import { PlusOutlined, UserOutlined, AntDesignOutlined } from '@ant-design/icons';
-import { Input, AutoComplete, Row, Col, Card, Button, Avatar, Tooltip, message } from 'antd';
+import { Input, AutoComplete, Row, Col, Card, Button, Avatar, Typography, Tooltip, message, } from 'antd';
 import cookies from 'react-cookies'
+const { Title } = Typography;
 
 const HomeContent = () => {
-    useEffect( () => {
+    const [projects, setProjects] = useState([])
+    useEffect(async () => {
         const url = 'http://127.0.0.1:9696/api/userproject';
-        axios.post(url, { jwt: cookies.load('jwt') }).then(res=>{
-            console.log(res.data)
-        }).catch((err) => {
+        const response = await axios.post(url, { jwt: cookies.load('jwt') }).catch((err) => {
             message.error(`Login fail!\n ${err.response.data.message}`)
         })
+        setProjects(response.data.user.myProjects)
     }, [])
 
     //Search
@@ -29,7 +30,7 @@ const HomeContent = () => {
                 return {
                     value: category,
                     label: (
-                        <div 
+                        <div
                             style={{
                                 display: 'flex',
                                 justifyContent: 'space-between',
@@ -56,7 +57,7 @@ const HomeContent = () => {
 
         const handleSearch = (value) => {
             setOptions(value ? searchResult(value) : []);
-        };  
+        };
 
         const onSelect = (value) => {
             console.log('onSelect', value);
@@ -206,42 +207,45 @@ const HomeContent = () => {
             </Row>
             <Row>
                 <Col offset={2} span={22}>
-                    <Row >
-                        {menuItems.slice(0, visible).map((listItems) => {
-                            if (listItems.items.length > 0) {
-                                return (     
-                                    <Col span={8} className="box-project">
-                                        <Card className="card-pro"
-                                            key={listItems.key}
-                                            title={listItems.title}
-                                            bordered={false}
-                                            extra={<a href="#">More</a>}
-                                            style={{ width: 300 }}>
-                                            {listItems.items.slice(0, hiddenitem).map((item) => {
-                                                return (
-                                                    <Row key={item.key}>
-                                                        <Col >
-                                                            {item.title}
-                                                        </Col>
-                                                    </Row>
-                                                );
-                                            })}
-                                            <p>...</p>
-                                            <Demo />
-                                        </Card>
-                                    </Col>
-                                );
-                            } else
-                                return (
-                                    <></>
-                                );
-                        })}
-                    </Row>
-                    <Row>
-                        <Col offset={9}>
-                            <button className="btn-load" onClick={showMoreItem}>Load More</button>
-                        </Col>
-                    </Row>
+
+                    {projects.length > 0 ? projects.map(listItems => (
+                        <>
+                            <Row>
+                                <Col span={8} className="box-project">
+                                    <Card className="card-pro"
+                                        key={listItems.key}
+                                        title={listItems.title}
+                                        bordered={false}
+                                        extra={<a href="#">More</a>}
+                                        style={{ width: 300 }}>
+                                        {listItems.items.slice(0, hiddenitem).map((item) => {
+                                            return (
+                                                <Row key={item.key}>
+                                                    <Col >
+                                                        {item.title}
+                                                    </Col>
+                                                </Row>
+                                            );
+                                        })}
+                                        <p>...</p>
+                                        <Demo />
+                                    </Card>
+                                </Col>
+                            </Row>
+                            <Row>
+                                <Col offset={9}>
+                                    <button className="btn-load" onClick={showMoreItem}>Load More</button>
+                                </Col>
+                            </Row>
+                        </>
+                    )) :
+                        <Row>
+                            <Col offset={5}>
+                                <Title level={3}>You have not participated in any project yet.</Title>
+                            </Col>
+                        </Row>
+                    }
+
                 </Col>
             </Row>
         </>

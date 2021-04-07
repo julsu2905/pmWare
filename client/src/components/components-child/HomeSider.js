@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from "react";
 import { useHistory } from 'react-router-dom'
-import { Menu, Button, Avatar, Row, Col } from 'antd';
+import { Menu, Button, Avatar, Row, Col, message } from 'antd';
 import { UserOutlined } from '@ant-design/icons';
 import {
   AppstoreOutlined,
@@ -12,11 +12,13 @@ import {
   MailOutlined,
 } from '@ant-design/icons';
 import '../component-css/HomeSider.css';
+import axios from 'axios'
 import cookies from 'react-cookies'
 
 const HomeSider = () => {
   const { SubMenu } = Menu;
   const [collapsed, setcollapseds] = useState(false);
+  const [username, setUsername] = useState("");
   const history = useHistory();
 
   const logout = () => {
@@ -33,6 +35,18 @@ const HomeSider = () => {
     setcollapseds(true)
     console.log("1");
   };
+
+  useEffect(async () => {
+    let token = cookies.load('jwt')
+    if (token) {
+      const url = "http://127.0.0.1:9696/api/";
+      const response = await axios.post(url + 'username', { jwt: cookies.load('jwt') }).catch(err => {
+        message.error(err)
+      })
+      setUsername(response.data.user.username)
+    }
+  });
+
   return (
     <div style={{ width: 'auto' }}>
       {/* <Button type="primary" onClick={toggleCollapsed} style={{ marginBottom: 16 }}>
@@ -55,7 +69,7 @@ const HomeSider = () => {
         <Row>
           <Col offset={6} span={11} className="user">
             <h1>
-              {cookies.load('username')}
+              {username ? username : ''}
             </h1>
           </Col>
         </Row>

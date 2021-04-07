@@ -1,40 +1,39 @@
 import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { Col, Menu, Row, Input } from "antd";
+import { Col, Menu, Row, Input, message } from "antd";
 import { HomeOutlined, UserOutlined, UserAddOutlined } from "@ant-design/icons";
 import "./component-css/Navigator.css";
-import cookies from "react-cookies";
+import cookies from "react-cookies"
+import axios from "axios"
 const { Search } = Input;
 
-const Navigator = () => {
+const Navigator = (props) => {
   const history = useHistory();
   const [current, setCurrent] = useState("home");
   const [username, setUsername] = useState("");
+
   const handleClick = (e) => {
     console.log("click ", e.key);
     setCurrent(e.key);
     if (e.key === "/") history.push("/");
     else history.push(`/${e.key}`);
+
   };
+
   const onSearch = (e, val) => {
     console.log("search", e, val);
   };
-  const logout = () => {
-    var keys = Object.keys(cookies.loadAll());
-    console.log(keys);
-    keys.forEach((key) => {
-      cookies.remove(key);
-    });
-    window.location.reload();
-  };
 
-  useEffect(() => {
-    let localUsername = cookies.load("username");
-    if (localUsername !== undefined) {
-      console.log(localUsername);
-      setUsername(localUsername);
+  useEffect(async () => {
+    let token = cookies.load('jwt')
+    if (token) {
+      const url = "http://127.0.0.1:9696/api/";
+      const response = await axios.post(url + 'username', { jwt: cookies.load('jwt') }).catch(err => {
+        message.error(err)
+      })
+      setUsername(response.data.user.username)
     }
-  }, [username]);
+  });
 
   return (
     <Row className="nav-wrapper">
@@ -77,7 +76,7 @@ const Navigator = () => {
           mode="horizontal"
         >
           <Menu.Item key="searchbar"></Menu.Item>
-          {username === "" ? (
+          {cookies.load('jwt') === undefined ? (
             <>
               <Menu.Item key="login" icon={<UserOutlined />}>
                 Đăng nhập
@@ -90,13 +89,6 @@ const Navigator = () => {
             <>
               <Menu.Item key="profile" icon={<UserOutlined />}>
                 {username}
-              </Menu.Item>
-              <Menu.Item
-                key="logout"
-                icon={<UserAddOutlined />}
-                onClick={logout}
-              >
-                Đăng xuất
               </Menu.Item>
             </>
           )}

@@ -51,24 +51,40 @@ exports.deleteMe = catchAsync(async (req, res, next) => {
 	});
 });
 exports.getUserProjects = catchAsync(async (req, res, next) => {
-	const token = await req.body.jwt
-	if (token)
-		try {
-			const decoded = await promisify(jwt.verify)(
-				token,
-				process.env.JWT_SECRET
-			);
-			var user = await User.findById(decoded.id, 'myProjects userTasks').populate('myProjects userTasks')
+	try {
+		const token = await req.body.jwt
+		const decoded = await promisify(jwt.verify)(
+			token,
+			process.env.JWT_SECRET
+		)
+		var user = await User.findById(decoded.id, 'myProjects userTasks').populate('myProjects userTasks')
 
-			res.status(200).json({
-				status: "success",
-				data: user,
-			});
-		}
-		catch (err) {
-			res.json(err)
-		}
+		res.status(200).json({
+			status: "success",
+			user,
+		});
+	} catch (err) {
+		res.json(err)
+	}
 
+
+})
+exports.getUsername= catchAsync(async (req, res, next) => {
+	try {
+		const token = await req.body.jwt
+		const decoded = await promisify(jwt.verify)(
+			token,
+			process.env.JWT_SECRET
+		)
+		var user = await User.findById(decoded.id, 'username')
+
+		res.status(200).json({
+			status: "success",
+			user,
+		});
+	} catch (err) {
+		res.json(err)
+	}
 })
 
 //Get All User

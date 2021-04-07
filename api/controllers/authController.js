@@ -123,6 +123,31 @@ exports.restrictTo = (...roles) => {
 		next();
 	};
 };
+exports.validateUser = catchAsync(async (req, res, next) => {
+	if (req.body.jwt) {
+		try {
+			// 1) verify token
+			const decoded = await promisify(jwt.verify)(
+				req.body.jwt,
+				process.env.JWT_SECRET
+			);
+
+			// 2) Check if user still exists
+			const currentUser = await User.findById(decoded.id);
+			if (!currentUser) {
+				res.json({ status: "fail" ,message:"Cant find user!"});
+			}
+
+			// THERE IS A LOGGED IN USER
+			//res.locals.user = currentUser;
+			res.json({ status: "success", user: currentUser });
+		} catch (err) {
+			//return next();
+			res.json(err);
+		}
+	}
+	else res.json({ status: "fail", message:"Cant find token"});
+})
 
 exports.updatePassword = catchAsync(async (req, res, next) => {
 	// 1) Get user from collection
