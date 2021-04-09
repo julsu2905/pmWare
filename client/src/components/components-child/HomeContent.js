@@ -3,7 +3,7 @@ import '../component-css/HomeContent.css';
 import axios from 'axios';
 import 'antd/dist/antd.css';
 import { PlusOutlined, UserOutlined, AntDesignOutlined } from '@ant-design/icons';
-import { Input, AutoComplete, Row, Col, Card, Button, Avatar, Typography, Tooltip, message, } from 'antd';
+import { Input, Form, Radio, Select, Cascader, DatePicker, InputNumber, TreeSelect, Switch, AutoComplete, Row, Col, Card, Button, Avatar, Typography, Tooltip, message, Modal } from 'antd';
 import cookies from 'react-cookies'
 const { Title } = Typography;
 
@@ -188,14 +188,96 @@ const HomeContent = () => {
     const showMoreItem = () => {
         setVisible((prevValue) => prevValue + 3);
     };
+
+    const [isModalVisible, setIsModalVisible] = useState(false);
+
+    const showModal = () => {
+        setIsModalVisible(true);
+    };
+
+    const handleOk = () => {
+        setIsModalVisible(false);
+    };
+
+    const handleCancel = () => {
+        setIsModalVisible(false);
+    };
+
+    const { TextArea } = Input;
+
+
     return (
         <>
+            <Modal
+                title="Create Project"
+                visible={isModalVisible}
+                onOk={handleOk}
+                onCancel={handleCancel}
+                centered
+                width={1000}
+                closable={false}
+                maskClosable={false}
+                okText="Create"
+            >
+
+
+                <Form
+                    labelCol={{ span: 4 }}
+                    wrapperCol={{ span: 14 }}
+                    layout="horizontal"
+                >
+                    <Form.Item label="Project Name">
+                        <Input />
+                    </Form.Item>
+                    <Form.Item label="Project Description">
+                        <TextArea rows={4} />
+                    </Form.Item>
+                    {/* <Form.Item label="TreeSelect">
+                        <TreeSelect
+                            treeData={[
+                                { title: 'Light', value: 'light', children: [{ title: 'Bamboo', value: 'bamboo' }] },
+                            ]}
+                        />
+                    </Form.Item>
+                    <Form.Item label="Cascader">
+                        <Cascader
+                            options={[
+                                {
+                                    value: 'zhejiang',
+                                    label: 'Zhejiang',
+                                    children: [
+                                        {
+                                            value: 'hangzhou',
+                                            label: 'Hangzhou',
+                                        },
+                                    ],
+                                },
+                            ]}
+                        />
+                    </Form.Item> */}
+                    <Form.Item label="Date Start">
+                        <DatePicker />
+                    </Form.Item>
+                    <Form.Item label="InputNumber">
+                        <InputNumber />
+                    </Form.Item>
+                    <Form.Item label="Status">
+                        <Switch />
+                    </Form.Item>
+                </Form>
+
+
+
+            </Modal>
+
             <Row className="search-P">
                 <Col offset={16} span={6}>
                     <Complete />
                 </Col>
                 <Col >
-                    <Button className="btn-plus" type="primary" icon={<PlusOutlined />} size={'large'} />
+                    <Button className="btn-plus" type="primary" icon={<PlusOutlined />} size={'large'}
+                        onClick={showModal}
+                    ></Button>
                 </Col>
             </Row>
             <Row>
@@ -248,6 +330,8 @@ const HomeContent = () => {
 
                 </Col>
             </Row>
+
+
         </>
     );
 };
