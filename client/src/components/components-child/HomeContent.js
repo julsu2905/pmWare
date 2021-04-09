@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import '../component-css/HomeContent.css';
+import { Link } from "react-router-dom";
 import axios from 'axios';
 import 'antd/dist/antd.css';
 import { PlusOutlined, UserOutlined, AntDesignOutlined } from '@ant-design/icons';
@@ -93,75 +94,7 @@ const HomeContent = () => {
 
         </>
     );
-    const menuItems = [
-        {
-            key: "introduction",
-            title: "Project 1",
-            items: [
-                { key: "su-menh", title: "Sứ mệnh, Tầm nhìn, Giá trị cốt lõi" },
-                { key: "shareholder", title: "Các cổ đông" },
-                { key: "history", title: "Lịch sử hình thành" },
-                { key: "organization-chart", title: "Sơ đồ tổ chức" },
-                { key: "ky-yeu", title: "Kỷ yếu 20 năm" },
-                { key: "inbound-certifications", title: " Các chứng chỉ nghiệp vụ" },
-            ],
-        },
-        {
-            key: "service",
-            title: "Project 2",
-            items: [
-                { key: "export", title: "Phục vụ hàng xuất" },
-                { key: "import", title: "Phục vụ hàng nhập" },
-                { key: "office-for-lease", title: "Văn phòng cho thuê" },
-                { key: "trung-tam-dao-tao", title: "Dịch vụ Đào tạo" },
-                { key: "other", title: "Các dịch vụ khác" },
-                { key: "handling-charges", title: "Bảng giá dịch vụ" },
-                { key: "registration-form", title: "Các biểu mẫu đăng ký" },
-            ],
-        },
-        {
-            key: "guide",
-            title: "Project 3",
-            items: [
-                { key: "collect-cargo", title: "Nhận hàng quốc tế" },
-                { key: "access-imp", title: "Thủ tục nhận hàng hàng nhập" },
-                { key: "dispatch-cargo", title: "Gửi hàng quốc tế" },
-                { key: "custom-procedure", title: "Thủ tục hải quan" },
-                { key: "other", title: "Kỷ yếu 20 năm" },
-            ],
-        },
-        {
-            key: "news",
-            title: "Project 4",
-            items: [
-                { key: "customer-news", title: "Tin dành cho khách hàng" },
-                { key: "airfreight-news", title: "Tin chuyên ngành" },
-                { key: "dispatch-cargo", title: "Gửi hàng quốc tế" },
-                { key: "internal-news", title: "Tin nội bộ" },
-                { key: "career-news", title: "Tin tuyển dụng và đào tạo" },
-            ],
-        },
-        {
-            key: "statistic",
-            title: "Project 5",
-            items: [
-                { key: "customer-news", title: "Tin dành cho khách hàng" },
-                { key: "airfreight-news", title: "Tin chuyên ngành" },
-                { key: "dispatch-cargo", title: "Gửi hàng quốc tế" },
-                { key: "internal-news", title: "Tin nội bộ" },
-            ],
-        },
-        {
-            key: "home", title: "Project 6", items: [
-                { key: "su-menh", title: "Sứ mệnh, Tầm nhìn, Giá trị cốt lõi" },
-                { key: "shareholder", title: "Các cổ đông" },
-                { key: "history", title: "Lịch sử hình thành" },
-                { key: "organization-chart", title: "Sơ đồ tổ chức" },
-                { key: "ky-yeu", title: "Kỷ yếu 20 năm" },
-                { key: "inbound-certifications", title: " Các chứng chỉ nghiệp vụ" }
-            ]
-        },
-    ];
+
 
     /*  const [initLoading, setInitLoading] = useState(true);
      const [loading, setLoading] = useState(false);
@@ -183,6 +116,8 @@ const HomeContent = () => {
  
      }; */
 
+
+
     const [visible, setVisible] = useState(3);
     const [hiddenitem, setHiddenitem] = useState(4);
     const showMoreItem = () => {
@@ -195,7 +130,9 @@ const HomeContent = () => {
                     <Complete />
                 </Col>
                 <Col >
-                    <Button className="btn-plus" type="primary" icon={<PlusOutlined />} size={'large'} />
+                    <Link to='/projectform'>
+                        <Button className="btn-plus" type="primary" icon={<PlusOutlined />} size={'large'} />
+                    </Link>
                 </Col>
             </Row>
             <Row>

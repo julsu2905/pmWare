@@ -31,7 +31,6 @@ const LoginForm = (props) => {
           const valided = await validUser(url);
            
           if (valided.status === "success") {
-            cookies.save('username', valided.user.username)
             
             setTimeout(async () => {
               await histor.push("/home")
