@@ -9,6 +9,11 @@ const { Title } = Typography;
 
 const HomeContent = () => {
     const [projects, setProjects] = useState([])
+    const [visible, setVisible] = useState(3);
+    const [hiddenitem, setHiddenitem] = useState(4);
+    const [isModalVisible, setIsModalVisible] = useState(false);
+    const { TextArea } = Input;
+    const { confirm } = Modal;
     useEffect(async () => {
         const url = 'http://127.0.0.1:9696/api/userproject';
         const response = await axios.post(url, { jwt: cookies.load('jwt') }).catch((err) => {
@@ -183,27 +188,41 @@ const HomeContent = () => {
  
      }; */
 
-    const [visible, setVisible] = useState(3);
-    const [hiddenitem, setHiddenitem] = useState(4);
+    
     const showMoreItem = () => {
         setVisible((prevValue) => prevValue + 3);
     };
 
-    const [isModalVisible, setIsModalVisible] = useState(false);
-
+    
     const showModal = () => {
         setIsModalVisible(true);
     };
 
     const handleOk = () => {
+        Modal.success({
+            content: 'some messages...some messages...',
+          });
         setIsModalVisible(false);
     };
-
+    
     const handleCancel = () => {
-        setIsModalVisible(false);
+        confirm({
+            title: 'Are you sure delete this task?',
+            content: 'Some descriptions',
+            okText: 'Yes',
+            okType: 'danger',
+            cancelText: 'No',
+            onOk() {
+                setIsModalVisible(false);
+            },
+            onCancel() {
+                setIsModalVisible(true);
+            },
+          });
+        
     };
 
-    const { TextArea } = Input;
+    
 
 
     return (
@@ -225,6 +244,7 @@ const HomeContent = () => {
                     labelCol={{ span: 4 }}
                     wrapperCol={{ span: 14 }}
                     layout="horizontal"
+                    
                 >
                     <Form.Item label="Project Name">
                         <Input />
@@ -258,8 +278,8 @@ const HomeContent = () => {
                     <Form.Item label="Date Start">
                         <DatePicker />
                     </Form.Item>
-                    <Form.Item label="InputNumber">
-                        <InputNumber />
+                    <Form.Item label="Members" >
+                        <InputNumber min={3} max={8} defaultValue={3}/>
                     </Form.Item>
                     <Form.Item label="Status">
                         <Switch />
