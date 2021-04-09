@@ -3,12 +3,17 @@ import '../component-css/HomeContent.css';
 import axios from 'axios';
 import 'antd/dist/antd.css';
 import { PlusOutlined, UserOutlined, AntDesignOutlined } from '@ant-design/icons';
-import { Input, AutoComplete, Row, Col, Card, Button, Avatar, Typography, Tooltip, message, } from 'antd';
+import { Input, Form, Radio, Select, Cascader, DatePicker, InputNumber, TreeSelect, Switch, AutoComplete, Row, Col, Card, Button, Avatar, Typography, Tooltip, message, Modal } from 'antd';
 import cookies from 'react-cookies'
 const { Title } = Typography;
 
 const HomeContent = () => {
     const [projects, setProjects] = useState([])
+    const [visible, setVisible] = useState(3);
+    const [hiddenitem, setHiddenitem] = useState(4);
+    const [isModalVisible, setIsModalVisible] = useState(false);
+    const { TextArea } = Input;
+    const { confirm } = Modal;
     useEffect(async () => {
         const url = 'http://127.0.0.1:9696/api/userproject';
         const response = await axios.post(url, { jwt: cookies.load('jwt') }).catch((err) => {
@@ -183,19 +188,116 @@ const HomeContent = () => {
  
      }; */
 
-    const [visible, setVisible] = useState(3);
-    const [hiddenitem, setHiddenitem] = useState(4);
+    
     const showMoreItem = () => {
         setVisible((prevValue) => prevValue + 3);
     };
+
+    
+    const showModal = () => {
+        setIsModalVisible(true);
+    };
+
+    const handleOk = () => {
+        Modal.success({
+            content: 'some messages...some messages...',
+          });
+        setIsModalVisible(false);
+    };
+    
+    const handleCancel = () => {
+        confirm({
+            title: 'Are you sure delete this task?',
+            content: 'Some descriptions',
+            okText: 'Yes',
+            okType: 'danger',
+            cancelText: 'No',
+            onOk() {
+                setIsModalVisible(false);
+            },
+            onCancel() {
+                setIsModalVisible(true);
+            },
+          });
+        
+    };
+
+    
+
+
     return (
         <>
+            <Modal
+                title="Create Project"
+                visible={isModalVisible}
+                onOk={handleOk}
+                onCancel={handleCancel}
+                centered
+                width={1000}
+                closable={false}
+                maskClosable={false}
+                okText="Create"
+            >
+
+
+                <Form
+                    labelCol={{ span: 4 }}
+                    wrapperCol={{ span: 14 }}
+                    layout="horizontal"
+                    
+                >
+                    <Form.Item label="Project Name">
+                        <Input />
+                    </Form.Item>
+                    <Form.Item label="Project Description">
+                        <TextArea rows={4} />
+                    </Form.Item>
+                    {/* <Form.Item label="TreeSelect">
+                        <TreeSelect
+                            treeData={[
+                                { title: 'Light', value: 'light', children: [{ title: 'Bamboo', value: 'bamboo' }] },
+                            ]}
+                        />
+                    </Form.Item>
+                    <Form.Item label="Cascader">
+                        <Cascader
+                            options={[
+                                {
+                                    value: 'zhejiang',
+                                    label: 'Zhejiang',
+                                    children: [
+                                        {
+                                            value: 'hangzhou',
+                                            label: 'Hangzhou',
+                                        },
+                                    ],
+                                },
+                            ]}
+                        />
+                    </Form.Item> */}
+                    <Form.Item label="Date Start">
+                        <DatePicker />
+                    </Form.Item>
+                    <Form.Item label="Members" >
+                        <InputNumber min={3} max={8} defaultValue={3}/>
+                    </Form.Item>
+                    <Form.Item label="Status">
+                        <Switch />
+                    </Form.Item>
+                </Form>
+
+
+
+            </Modal>
+
             <Row className="search-P">
                 <Col offset={16} span={6}>
                     <Complete />
                 </Col>
                 <Col >
-                    <Button className="btn-plus" type="primary" icon={<PlusOutlined />} size={'large'} />
+                    <Button className="btn-plus" type="primary" icon={<PlusOutlined />} size={'large'}
+                        onClick={showModal}
+                    ></Button>
                 </Col>
             </Row>
             <Row>
@@ -248,6 +350,8 @@ const HomeContent = () => {
 
                 </Col>
             </Row>
+
+
         </>
     );
 };
