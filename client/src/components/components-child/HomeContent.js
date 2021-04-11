@@ -10,12 +10,25 @@ const { Title } = Typography;
 
 const HomeContent = () => {
     const [projects, setProjects] = useState([])
+    const [visible, setVisible] = useState(3);
+    const [hiddenitem, setHiddenitem] = useState(4);
+    const [isModalVisible, setIsModalVisible] = useState(false);
+    const { TextArea } = Input;
+    const { confirm } = Modal;
+    var project = {
+        jwt: cookies.load('jwt'),
+        projectName: '',
+        memberQuantity: 3,
+        description: '',
+        active: false
+    }
     useEffect(async () => {
         const url = 'http://127.0.0.1:9696/api/userproject';
         const response = await axios.post(url, { jwt: cookies.load('jwt') }).catch((err) => {
             message.error(`Login fail!\n ${err.response.data.message}`)
         })
         setProjects(response.data.user.myProjects)
+        console.log(response.data)
     }, [])
 
     //Search
@@ -117,29 +130,45 @@ const HomeContent = () => {
      }; */
 
 
-
-    const [visible, setVisible] = useState(3);
-    const [hiddenitem, setHiddenitem] = useState(4);
     const showMoreItem = () => {
         setVisible((prevValue) => prevValue + 3);
     };
 
-    const [isModalVisible, setIsModalVisible] = useState(false);
 
     const showModal = () => {
         setIsModalVisible(true);
     };
 
-    const handleOk = () => {
+    const handleOk = async () => {
+        const url = "http://127.0.0.1:9696/api/";
+
+        const response = await axios.post(url + 'project', await project).catch(err => {
+            message.error(err);
+        })
+        console.log(response)
+        Modal.success({
+            content: 'Create project successfully.',
+        });
         setIsModalVisible(false);
     };
 
     const handleCancel = () => {
-        setIsModalVisible(false);
+        confirm({
+            title: 'Are you sure delete this task?',
+            content: 'Some descriptions',
+            okText: 'Yes',
+            okType: 'danger',
+            cancelText: 'No',
+            onOk() {
+                setIsModalVisible(false);
+            },
+            onCancel() {
+                setIsModalVisible(true);
+            },
+        });
+
     };
-
-    const { TextArea } = Input;
-
+    
 
     return (
         <>
@@ -158,44 +187,24 @@ const HomeContent = () => {
                     labelCol={{ span: 4 }}
                     wrapperCol={{ span: 14 }}
                     layout="horizontal"
+
+
                 >
                     <Form.Item label="Project Name">
-                        <Input />
+                        <Input name="projectName"
+                            onChange={(values) => project.projectName = values} />
                     </Form.Item>
                     <Form.Item label="Project Description">
-                        <TextArea rows={4} />
+                        <TextArea name="description" rows={4} onChange={(values) => project.description = values} />
                     </Form.Item>
-                    {/* <Form.Item label="TreeSelect">
-                        <TreeSelect
-                            treeData={[
-                                { title: 'Light', value: 'light', children: [{ title: 'Bamboo', value: 'bamboo' }] },
-                            ]}
-                        />
-                    </Form.Item>
-                    <Form.Item label="Cascader">
-                        <Cascader
-                            options={[
-                                {
-                                    value: 'zhejiang',
-                                    label: 'Zhejiang',
-                                    children: [
-                                        {
-                                            value: 'hangzhou',
-                                            label: 'Hangzhou',
-                                        },
-                                    ],
-                                },
-                            ]}
-                        />
-                    </Form.Item> */}
-                    <Form.Item label="Date Start">
+                    {/*<Form.Item label="Date Start">
                         <DatePicker />
+                </Form.Item>*/}
+                    <Form.Item label="Members" >
+                        <InputNumber name="memberQuantity" onChange={(values) => project.memberQuantity = values} min={2} max={8} defaultValue={3} />
                     </Form.Item>
-                    <Form.Item label="InputNumber">
-                        <InputNumber />
-                    </Form.Item>
-                    <Form.Item label="Status">
-                        <Switch />
+                    <Form.Item label="Active">
+                        <Switch name="active" onChange={(values) => project.active = values} />
                     </Form.Item>
                 </Form>
 
@@ -223,26 +232,21 @@ const HomeContent = () => {
             <Row>
                 <Col offset={2} span={22}>
 
-                    {projects.length > 0 ? projects.map(listItems => (
+                    {projects.length > 0 ? projects.map(project => (
                         <>
                             <Row>
                                 <Col span={8} className="box-project">
                                     <Card className="card-pro"
-                                        key={listItems.key}
-                                        title={listItems.title}
+                                        key={project.id}
+                                        title={project.projectName}
                                         bordered={false}
-                                        extra={<a href="#">More</a>}
+                                        extra={<a href={"/project/"+project._id}>More</a>}
                                         style={{ width: 300 }}>
-                                        {listItems.items.slice(0, hiddenitem).map((item) => {
-                                            return (
-                                                <Row key={item.key}>
-                                                    <Col >
-                                                        {item.title}
-                                                    </Col>
-                                                </Row>
-                                            );
-                                        })}
-                                        <p>...</p>
+                                        <Row >
+                                            <Col >
+                                                {project.description}
+                                            </Col>
+                                        </Row>
                                         <Demo />
                                     </Card>
                                 </Col>
