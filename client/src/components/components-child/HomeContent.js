@@ -155,14 +155,14 @@ const HomeContent = () => {
             content: 'Create project successfully.',
         });
         window.location.reload()
-        
+
         setIsModalVisible(false);
     };
 
     const handleCancel = () => {
         confirm({
             title: 'Are you sure delete this task?',
-            content: 'Some descriptions',
+            /* content: 'Some descriptions', */
             okText: 'Yes',
             okType: 'danger',
             cancelText: 'No',
@@ -238,10 +238,10 @@ const HomeContent = () => {
             </Row>
             <Row>
                 <Col offset={2} span={22}>
+                    <Row>
+                        {projects.length > 0 ? projects.slice(0, visible).map(project => (
 
-                    {projects.length > 0 ? projects.map(project => (
 
-                        <Row>
                             <Col span={8} className="box-project">
                                 <Card className="card-pro"
                                     key={project.id}
@@ -257,17 +257,18 @@ const HomeContent = () => {
                                     <Demo />
                                 </Card>
                             </Col>
-                        </Row>
 
-                    )
 
-                    ) :
-                        <Row>
-                            <Col offset={5}>
-                                <Title level={3}>You have not participated in any project yet.</Title>
-                            </Col>
-                        </Row>
-                    }
+                        )
+
+                        ) :
+                            <Row>
+                                <Col offset={5}>
+                                    <Title level={3}>You have not participated in any project yet.</Title>
+                                </Col>
+                            </Row>
+                        }
+                    </Row>
                     {projects.length > 0 ? < Row >
                         <Col offset={9}>
                             <button className="btn-load" onClick={showMoreItem}>Load More</button>
