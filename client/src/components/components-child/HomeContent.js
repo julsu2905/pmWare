@@ -10,18 +10,15 @@ const { Title } = Typography;
 
 const HomeContent = () => {
     const [projects, setProjects] = useState([])
+    const [projectName, setProjectName] = useState('')
+    const [description, setDescription] = useState('')
+    const [memberQuantity, setMemberQuantity] = useState(3)
+    const [active, setActive] = useState(false)
     const [visible, setVisible] = useState(3);
     const [hiddenitem, setHiddenitem] = useState(4);
     const [isModalVisible, setIsModalVisible] = useState(false);
     const { TextArea } = Input;
     const { confirm } = Modal;
-    var project = {
-        jwt: cookies.load('jwt'),
-        projectName: '',
-        memberQuantity: 3,
-        description: '',
-        active: false
-    }
     useEffect(async () => {
         const url = 'http://127.0.0.1:9696/api/userproject';
         const response = await axios.post(url, { jwt: cookies.load('jwt') }).catch((err) => {
@@ -138,17 +135,27 @@ const HomeContent = () => {
     const showModal = () => {
         setIsModalVisible(true);
     };
-
-    const handleOk = async () => {
+    const createProject = async () => {
         const url = "http://127.0.0.1:9696/api/";
-
-        const response = await axios.post(url + 'project', await project).catch(err => {
+        const response = await axios.post(url + 'project', {
+            jwt: cookies.load('jwt'),
+            projectName: projectName,
+            memberQuantity: memberQuantity,
+            description: description,
+            active: active
+        }).catch(err => {
             message.error(err);
         })
-        console.log(response)
+
+    }
+
+    const handleOk = () => {
+        createProject()
         Modal.success({
             content: 'Create project successfully.',
         });
+        window.location.reload()
+        
         setIsModalVisible(false);
     };
 
@@ -168,7 +175,7 @@ const HomeContent = () => {
         });
 
     };
-    
+
 
     return (
         <>
@@ -192,19 +199,19 @@ const HomeContent = () => {
                 >
                     <Form.Item label="Project Name">
                         <Input name="projectName"
-                            onChange={(values) => project.projectName = values} />
+                            onChange={(e) => setProjectName(e.target.value)} />
                     </Form.Item>
                     <Form.Item label="Project Description">
-                        <TextArea name="description" rows={4} onChange={(values) => project.description = values} />
+                        <TextArea name="description" rows={4} onChange={(e) => setDescription(e.target.value)} />
                     </Form.Item>
                     {/*<Form.Item label="Date Start">
                         <DatePicker />
                 </Form.Item>*/}
                     <Form.Item label="Members" >
-                        <InputNumber name="memberQuantity" onChange={(values) => project.memberQuantity = values} min={2} max={8} defaultValue={3} />
+                        <InputNumber name="memberQuantity" onChange={(value) => { setMemberQuantity(value) }} min={2} max={8} defaultValue={3} />
                     </Form.Item>
                     <Form.Item label="Active">
-                        <Switch name="active" onChange={(values) => project.active = values} />
+                        <Switch name="active" onChange={(value) => setActive(value)} />
                     </Form.Item>
                 </Form>
 
@@ -233,37 +240,39 @@ const HomeContent = () => {
                 <Col offset={2} span={22}>
 
                     {projects.length > 0 ? projects.map(project => (
-                        <>
-                            <Row>
-                                <Col span={8} className="box-project">
-                                    <Card className="card-pro"
-                                        key={project.id}
-                                        title={project.projectName}
-                                        bordered={false}
-                                        extra={<a href={"/project/"+project._id}>More</a>}
-                                        style={{ width: 300 }}>
-                                        <Row >
-                                            <Col >
-                                                {project.description}
-                                            </Col>
-                                        </Row>
-                                        <Demo />
-                                    </Card>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col offset={9}>
-                                    <button className="btn-load" onClick={showMoreItem}>Load More</button>
-                                </Col>
-                            </Row>
-                        </>
-                    )) :
+
+                        <Row>
+                            <Col span={8} className="box-project">
+                                <Card className="card-pro"
+                                    key={project.id}
+                                    title={project.projectName}
+                                    bordered={false}
+                                    extra={<a href={"/project/" + project._id}>More</a>}
+                                    style={{ width: 300 }}>
+                                    <Row >
+                                        <Col >
+                                            {project.description}
+                                        </Col>
+                                    </Row>
+                                    <Demo />
+                                </Card>
+                            </Col>
+                        </Row>
+
+                    )
+
+                    ) :
                         <Row>
                             <Col offset={5}>
                                 <Title level={3}>You have not participated in any project yet.</Title>
                             </Col>
                         </Row>
                     }
+                    {projects.length > 0 ? < Row >
+                        <Col offset={9}>
+                            <button className="btn-load" onClick={showMoreItem}>Load More</button>
+                        </Col>
+                    </Row> : ''}
 
                 </Col>
             </Row>

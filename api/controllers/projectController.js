@@ -9,8 +9,10 @@ const Task = require("../models/taskModel");
 
 
 exports.createProject = catchAsync(async (req, res, next) => {
+  console.log(req.body)
+  const token = await req.body.jwt
   const decoded = await promisify(jwt.verify)(
-    req.body.jwt,
+    token,
     process.env.JWT_SECRET
   );
   let project = await Project.findOne({
@@ -24,7 +26,7 @@ exports.createProject = catchAsync(async (req, res, next) => {
       projectName: req.body.projectName,
       memberQuantity: req.body.memberQuantity,
       description: req.body.description,
-      active:req.body.active,
+      active: req.body.active,
       admin: decoded.id,
       members: [decoded.id],
     };
