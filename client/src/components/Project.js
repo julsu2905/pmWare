@@ -1,18 +1,19 @@
 import React, { useState } from "react";
 import {DragDropContext, Droppable, Draggable} from 'react-beautiful-dnd';
 import {v4 as uuid} from "uuid"; 
-import { Layout, Row, Col,Divider } from "antd";
+import { Layout, Row, Col,Divider,Button } from "antd";
 import "./component-css/Project.css";
 import ModalAddmembers from './components-child/ModalAddmembers'
 /* import Column from "antd/lib/table/Column"; */
+import ModalCreateTask from './components-child/ModalCreateTask'
 
 //drop and Drag
 const itemsFromBackend = [
-  { id: uuid(), content: "Cart Title 1" },
-  { id: uuid(), content: "Cart Title 2" },
-  { id: uuid(), content: "Cart Title 3" },
-  { id: uuid(), content: "Cart Title 4" },
-  { id: uuid(), content: "Cart Title 5" }
+  { id: uuid(), content: "Task 1" },
+  { id: uuid(), content: "Task 2" },
+  { id: uuid(), content: "Task 3" },
+  { id: uuid(), content: "Task 4" },
+  { id: uuid(), content: "Task 5" }
 ];
 
 const columnsFromBackend = {
@@ -72,19 +73,28 @@ const onDragEnd = (result, columns, setColumns) => {
 };
  
 export default function Project() {
+  
   const [columns, setColumns] = useState(columnsFromBackend);
   return (
+    
     <div style={{ display: "flex", justifyContent: "center", height: "100%" }}>
       <DragDropContext
         onDragEnd={result => onDragEnd(result, columns, setColumns)}
       >
+        <ModalCreateTask style={{
+          display:"flex",
+          justifyContent:"center"
+        }} />
+       
         {Object.entries(columns).map(([columnId, column], index) => {
           return (
             <div
               style={{
                 display: "flex",
                 flexDirection: "column",
-                alignItems: "center"
+                alignItems: "center",
+                fontFamily:"sans-serif",
+                fontSize:"16px"
               }}
               key={columnId}
             >
@@ -98,7 +108,7 @@ export default function Project() {
                         ref={provided.innerRef}
                         style={{
                           background: snapshot.isDraggingOver
-                            ? "lightblue"
+                            ? "#9FF781"
                             : "lightgrey",
                           padding: 4,
                           width: 250,
@@ -137,7 +147,7 @@ export default function Project() {
                                       <p>
                                         Lorem ipsum dolor sit amet
                                       </p>
-                                      <ModalAddmembers/>
+                                      <ModalAddmembers />
 
                                   </div>
                                 );
