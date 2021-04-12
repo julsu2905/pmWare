@@ -7,9 +7,12 @@ const User = require("../models/userModel");
 const Project = require("../models/projectModel");
 const Task = require("../models/taskModel");
 
+
 exports.createProject = catchAsync(async (req, res, next) => {
+  console.log(req.body)
+  const token = await req.body.jwt
   const decoded = await promisify(jwt.verify)(
-    req.cookies.jwt,
+    token,
     process.env.JWT_SECRET
   );
   let project = await Project.findOne({
@@ -23,6 +26,7 @@ exports.createProject = catchAsync(async (req, res, next) => {
       projectName: req.body.projectName,
       memberQuantity: req.body.memberQuantity,
       description: req.body.description,
+      active: req.body.active,
       admin: decoded.id,
       members: [decoded.id],
     };
@@ -111,27 +115,6 @@ exports.deleteProject = catchAsync(async (req, res, next) => {
   res.redirect("/home");
 });
 
-/* exports.getUserProjects = catchAsync(async (req, res, next) => {
-  
-  const decoded = await promisify(jwt.verify)(
-    req.body.jwt,
-    process.env.JWT_SECRET
-  );
 
-  var user = await User.findById(decoded.id,'myProjects userTasks');
-  const limit = 20;
-  const page = +req.query.page * 1 || 1;
-  const totalItems = await Project.find({
-    _id: {
-      $in: user.myProjects,
-    },
-    active: true,
-  }).countDocuments();
-
-  res.status(200).json({
-    status: "success",
-    data: user,
-  });
-}); */
 exports.getProject = factory.getOne(Project);
 exports.getAllProjects = factory.getAll(Project);

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import '../component-css/HomeContent.css';
+import { Link } from "react-router-dom";
 import axios from 'axios';
 import 'antd/dist/antd.css';
 import { PlusOutlined, UserOutlined, AntDesignOutlined } from '@ant-design/icons';
@@ -9,6 +10,10 @@ const { Title } = Typography;
 
 const HomeContent = () => {
     const [projects, setProjects] = useState([])
+    const [projectName, setProjectName] = useState('')
+    const [description, setDescription] = useState('')
+    const [memberQuantity, setMemberQuantity] = useState(3)
+    const [active, setActive] = useState(false)
     const [visible, setVisible] = useState(3);
     const [hiddenitem, setHiddenitem] = useState(4);
     const [isModalVisible, setIsModalVisible] = useState(false);
@@ -20,6 +25,7 @@ const HomeContent = () => {
             message.error(`Login fail!\n ${err.response.data.message}`)
         })
         setProjects(response.data.user.myProjects)
+        console.log(response.data)
     }, [])
 
     //Search
@@ -98,75 +104,7 @@ const HomeContent = () => {
 
         </>
     );
-    const menuItems = [
-        {
-            key: "introduction",
-            title: "Project 1",
-            items: [
-                { key: "su-menh", title: "Sứ mệnh, Tầm nhìn, Giá trị cốt lõi" },
-                { key: "shareholder", title: "Các cổ đông" },
-                { key: "history", title: "Lịch sử hình thành" },
-                { key: "organization-chart", title: "Sơ đồ tổ chức" },
-                { key: "ky-yeu", title: "Kỷ yếu 20 năm" },
-                { key: "inbound-certifications", title: " Các chứng chỉ nghiệp vụ" },
-            ],
-        },
-        {
-            key: "service",
-            title: "Project 2",
-            items: [
-                { key: "export", title: "Phục vụ hàng xuất" },
-                { key: "import", title: "Phục vụ hàng nhập" },
-                { key: "office-for-lease", title: "Văn phòng cho thuê" },
-                { key: "trung-tam-dao-tao", title: "Dịch vụ Đào tạo" },
-                { key: "other", title: "Các dịch vụ khác" },
-                { key: "handling-charges", title: "Bảng giá dịch vụ" },
-                { key: "registration-form", title: "Các biểu mẫu đăng ký" },
-            ],
-        },
-        {
-            key: "guide",
-            title: "Project 3",
-            items: [
-                { key: "collect-cargo", title: "Nhận hàng quốc tế" },
-                { key: "access-imp", title: "Thủ tục nhận hàng hàng nhập" },
-                { key: "dispatch-cargo", title: "Gửi hàng quốc tế" },
-                { key: "custom-procedure", title: "Thủ tục hải quan" },
-                { key: "other", title: "Kỷ yếu 20 năm" },
-            ],
-        },
-        {
-            key: "news",
-            title: "Project 4",
-            items: [
-                { key: "customer-news", title: "Tin dành cho khách hàng" },
-                { key: "airfreight-news", title: "Tin chuyên ngành" },
-                { key: "dispatch-cargo", title: "Gửi hàng quốc tế" },
-                { key: "internal-news", title: "Tin nội bộ" },
-                { key: "career-news", title: "Tin tuyển dụng và đào tạo" },
-            ],
-        },
-        {
-            key: "statistic",
-            title: "Project 5",
-            items: [
-                { key: "customer-news", title: "Tin dành cho khách hàng" },
-                { key: "airfreight-news", title: "Tin chuyên ngành" },
-                { key: "dispatch-cargo", title: "Gửi hàng quốc tế" },
-                { key: "internal-news", title: "Tin nội bộ" },
-            ],
-        },
-        {
-            key: "home", title: "Project 6", items: [
-                { key: "su-menh", title: "Sứ mệnh, Tầm nhìn, Giá trị cốt lõi" },
-                { key: "shareholder", title: "Các cổ đông" },
-                { key: "history", title: "Lịch sử hình thành" },
-                { key: "organization-chart", title: "Sơ đồ tổ chức" },
-                { key: "ky-yeu", title: "Kỷ yếu 20 năm" },
-                { key: "inbound-certifications", title: " Các chứng chỉ nghiệp vụ" }
-            ]
-        },
-    ];
+
 
     /*  const [initLoading, setInitLoading] = useState(true);
      const [loading, setLoading] = useState(false);
@@ -188,27 +126,42 @@ const HomeContent = () => {
  
      }; */
 
-    
+
     const showMoreItem = () => {
         setVisible((prevValue) => prevValue + 3);
     };
 
-    
+
     const showModal = () => {
         setIsModalVisible(true);
     };
+    const createProject = async () => {
+        const url = "http://127.0.0.1:9696/api/";
+        const response = await axios.post(url + 'project', {
+            jwt: cookies.load('jwt'),
+            projectName: projectName,
+            memberQuantity: memberQuantity,
+            description: description,
+            active: active
+        }).catch(err => {
+            message.error(err);
+        })
+
+    }
 
     const handleOk = () => {
+        createProject()
         Modal.success({
-            content: 'some messages...some messages...',
-          });
+            content: 'Create project successfully.',
+        });
+        window.location.reload()
+
         setIsModalVisible(false);
     };
-    
+
     const handleCancel = () => {
         confirm({
-            title: 'Are you sure delete this task?',
-            content: 'Some descriptions',
+            title: 'Are you sure delete this project?',
             okText: 'Yes',
             okType: 'danger',
             cancelText: 'No',
@@ -218,11 +171,9 @@ const HomeContent = () => {
             onCancel() {
                 setIsModalVisible(true);
             },
-          });
-        
-    };
+        });
 
-    
+    };
 
 
     return (
@@ -238,51 +189,28 @@ const HomeContent = () => {
                 maskClosable={false}
                 okText="Create"
             >
-
-
                 <Form
                     labelCol={{ span: 4 }}
                     wrapperCol={{ span: 14 }}
                     layout="horizontal"
-                    
+
+
                 >
                     <Form.Item label="Project Name">
-                        <Input />
+                        <Input name="projectName"
+                            onChange={(e) => setProjectName(e.target.value)} />
                     </Form.Item>
                     <Form.Item label="Project Description">
-                        <TextArea rows={4} />
+                        <TextArea name="description" rows={4} onChange={(e) => setDescription(e.target.value)} />
                     </Form.Item>
-                    {/* <Form.Item label="TreeSelect">
-                        <TreeSelect
-                            treeData={[
-                                { title: 'Light', value: 'light', children: [{ title: 'Bamboo', value: 'bamboo' }] },
-                            ]}
-                        />
-                    </Form.Item>
-                    <Form.Item label="Cascader">
-                        <Cascader
-                            options={[
-                                {
-                                    value: 'zhejiang',
-                                    label: 'Zhejiang',
-                                    children: [
-                                        {
-                                            value: 'hangzhou',
-                                            label: 'Hangzhou',
-                                        },
-                                    ],
-                                },
-                            ]}
-                        />
-                    </Form.Item> */}
-                    <Form.Item label="Date Start">
+                    {/*<Form.Item label="Date Start">
                         <DatePicker />
-                    </Form.Item>
+                </Form.Item>*/}
                     <Form.Item label="Members" >
-                        <InputNumber min={3} max={8} defaultValue={3}/>
+                        <InputNumber name="memberQuantity" onChange={(value) => { setMemberQuantity(value) }} min={2} max={8} defaultValue={3} />
                     </Form.Item>
-                    <Form.Item label="Status">
-                        <Switch />
+                    <Form.Item label="Active">
+                        <Switch name="active" onChange={(value) => setActive(value)} />
                     </Form.Item>
                 </Form>
 
@@ -309,44 +237,42 @@ const HomeContent = () => {
             </Row>
             <Row>
                 <Col offset={2} span={22}>
+                    <Row>
+                        {projects.length > 0 ? projects.slice(0, visible).map(project => (
 
-                    {projects.length > 0 ? projects.map(listItems => (
-                        <>
-                            <Row>
-                                <Col span={8} className="box-project">
-                                    <Card className="card-pro"
-                                        key={listItems.key}
-                                        title={listItems.title}
-                                        bordered={false}
-                                        extra={<a href="#">More</a>}
-                                        style={{ width: 300 }}>
-                                        {listItems.items.slice(0, hiddenitem).map((item) => {
-                                            return (
-                                                <Row key={item.key}>
-                                                    <Col >
-                                                        {item.title}
-                                                    </Col>
-                                                </Row>
-                                            );
-                                        })}
-                                        <p>...</p>
-                                        <Demo />
-                                    </Card>
-                                </Col>
-                            </Row>
-                            <Row>
-                                <Col offset={9}>
-                                    <button className="btn-load" onClick={showMoreItem}>Load More</button>
-                                </Col>
-                            </Row>
-                        </>
-                    )) :
-                        <Row>
-                            <Col offset={5}>
-                                <Title level={3}>You have not participated in any project yet.</Title>
+
+                            <Col span={8} className="box-project">
+                                <Card className="card-pro"
+                                    key={project.id}
+                                    title={project.projectName}
+                                    bordered={false}
+                                    extra={<a href={"/project/" + project._id}>More</a>}
+                                    style={{ width: 300 }}>
+                                    <Row >
+                                        <Col >
+                                            {project.description}
+                                        </Col>
+                                    </Row>
+                                    <Demo />
+                                </Card>
                             </Col>
-                        </Row>
-                    }
+
+
+                        )
+
+                        ) :
+                            <Row>
+                                <Col offset={5}>
+                                    <Title level={3}>You have not participated in any project yet.</Title>
+                                </Col>
+                            </Row>
+                        }
+                    </Row>
+                    {projects.length > 0 ? < Row >
+                        <Col offset={9}>
+                            <button className="btn-load" onClick={showMoreItem}>Load More</button>
+                        </Col>
+                    </Row> : ''}
 
                 </Col>
             </Row>
