@@ -146,7 +146,7 @@ const HomeContent = () => {
         }).catch(err => {
             message.error(err);
         })
-
+        setProjects([...projects,response.data.data])
     }
 
     const handleOk = () => {
@@ -161,7 +161,7 @@ const HomeContent = () => {
 
     const handleCancel = () => {
         confirm({
-            title: 'Are you sure delete this task?',
+            title: 'Are you sure delete this project?',
             content: 'Some descriptions',
             okText: 'Yes',
             okType: 'danger',

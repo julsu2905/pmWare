@@ -117,7 +117,7 @@ const LoginForm = (props) => {
             >
               Log in
             </Button>
-            Or <a href="/register">register now!</a>
+            Or <Link to="/register">register now!</Link>
           </Form.Item>
         </Form>
       </Col>
