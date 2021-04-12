@@ -146,7 +146,7 @@ const HomeContent = () => {
         }).catch(err => {
             message.error(err);
         })
-        setProjects([...projects,response.data.data])
+
     }
 
     const handleOk = () => {
