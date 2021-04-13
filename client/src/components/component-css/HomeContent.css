@@ -52,3 +52,6 @@
     transform: translateY(-5px);
     transition: 0.5s;
 }
+.more{
+    margin-top: 20px;
+}
