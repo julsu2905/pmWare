@@ -3,7 +3,7 @@ import '../component-css/HomeContent.css';
 import { Link } from "react-router-dom";
 import axios from 'axios';
 import 'antd/dist/antd.css';
-import { PlusOutlined, UserOutlined, AntDesignOutlined } from '@ant-design/icons';
+import { PlusOutlined, UserOutlined, AntDesignOutlined, CloseOutlined } from '@ant-design/icons';
 import { Input, Form, Radio, Select, Cascader, DatePicker, InputNumber, TreeSelect, Switch, AutoComplete, Row, Col, Card, Button, Avatar, Typography, Tooltip, message, Modal } from 'antd';
 import cookies from 'react-cookies'
 const { Title } = Typography;
@@ -175,6 +175,22 @@ const HomeContent = () => {
 
     };
 
+    function showDeleteConfirm(project) {
+        confirm({
+          title: 'Are you sure delete this task?',
+          content: 'Some descriptions',
+          okText: 'Yes',
+          okType: 'danger',
+          cancelText: 'No',
+          onOk() {
+              //id thằng xóa !!!
+            console.log(project._id);
+          },
+          onCancel() {
+            setIsModalVisible(false);
+          },
+        });
+      }
 
     return (
         <>
@@ -246,14 +262,23 @@ const HomeContent = () => {
                                     key={project._id}
                                     title={project.projectName}
                                     bordered={false}
-                                    extra={<Link to={`project/${project._id}`}>More</Link>}
+
+                                    extra={<Button onClick={()=>showDeleteConfirm(project)} icon={<CloseOutlined />}/>}
+
                                     style={{ width: 300 }}>
                                     <Row >
                                         <Col >
                                             {project.description}
                                         </Col>
                                     </Row>
-                                    <Demo />
+                                    <Row>
+                                        <Col>
+                                            <Demo />
+                                        </Col>
+                                        <Col offset={11}  className="more">
+                                            <Link to={"/project/" + project._id}>More</Link>
+                                        </Col>
+                                    </Row>
                                 </Card>
                             </Col>
 

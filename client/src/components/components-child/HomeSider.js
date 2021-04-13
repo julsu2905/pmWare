@@ -82,12 +82,6 @@ const HomeSider = () => {
         <Menu.Item key="3" icon={<MailOutlined />}>
           Invited
         </Menu.Item>
-        {/* <SubMenu key="sub1" icon={<ContainerOutlined />} title="Navigation One">
-            <Menu.Item key="5">Option 5</Menu.Item>
-            <Menu.Item key="6">Option 6</Menu.Item>
-            <Menu.Item key="7">Option 7</Menu.Item>
-            <Menu.Item key="8">Option 8</Menu.Item>
-          </SubMenu> */}
         <SubMenu key="sub2" icon={<AppstoreOutlined />} title="Edit">
           <Menu.Item key="9" onClick={() => history.push('/profile')}>Profile</Menu.Item>
           <Menu.Item key="10">System</Menu.Item>
