@@ -46,7 +46,6 @@ const HomeContent = () => {
       .catch((err) => {
         message.error(`Login fail!\n ${err.response.data.message}`);
       });
-    console.log(response.data);
     setProjects(response.data.user.myProjects);
   }, []);
 
@@ -138,26 +137,6 @@ const HomeContent = () => {
     </>
   );
 
-  /*  const [initLoading, setInitLoading] = useState(true);
-     const [loading, setLoading] = useState(false);
-     const count = 3;
-     const Data= [];
-     const list = [];
-     useEffect(() => {
-         // Update the document title using the browser API
-         getData(res => {
-             setInitLoading(false)
-             this.setState({
-               initLoading: false,
-               
-             });
-           });
-       });
- 
-     const LoadItems = () => {
- 
-     }; */
-
   const showMoreItem = () => {
     setVisible((prevValue) => prevValue + 3);
   };
@@ -205,7 +184,6 @@ const HomeContent = () => {
             axios
               .post(url, { jwt: cookies.load("jwt") })
               .then((response) => {
-                console.log(response);
                 setProjects(response.data.user.myProjects);
               })
               .catch((err) => {
@@ -330,6 +308,9 @@ const HomeContent = () => {
                     >
                       <Row>
                         <Col>{project.description}</Col>
+                      </Row>
+                      <Row>
+                        <Col><Link to={`/project/${project._id}`}>More</Link></Col>
                       </Row>
                       <Demo />
                     </Card>
