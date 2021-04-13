@@ -24,8 +24,8 @@ const HomeContent = () => {
         const response = await axios.post(url, { jwt: cookies.load('jwt') }).catch((err) => {
             message.error(`Login fail!\n ${err.response.data.message}`)
         })
-        setProjects(response.data.user.myProjects)
         console.log(response.data)
+        setProjects(response.data.user.myProjects)
     }, [])
 
     //Search

@@ -53,10 +53,10 @@ exports.deleteMe = catchAsync(async (req, res, next) => {
 });
 exports.getUserProjects = catchAsync(async (req, res, next) => {
   try {
-    const token = await req.body.jwt;
+    const token = req.body.jwt;
     const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
     var user = await User.find(
-      { id: decoded.id, active: true },
+      { id: decoded.id },
       "myProjects userTasks"
     ).populate("myProjects userTasks");
 
@@ -70,7 +70,7 @@ exports.getUserProjects = catchAsync(async (req, res, next) => {
 });
 exports.getUsername = catchAsync(async (req, res, next) => {
   try {
-    const token = await req.body.jwt;
+    const token = req.body.jwt;
     const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
     var user = await User.findById(decoded.id, "username");
 
