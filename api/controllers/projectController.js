@@ -116,5 +116,5 @@ exports.deleteProject = catchAsync(async (req, res, next) => {
 });
 
 
-exports.getProject = factory.getOne(Project);
+exports.getProject = factory.getOne(Project,'projectTasks');
 exports.getAllProjects = factory.getAll(Project);

@@ -26,14 +26,13 @@ const LoginForm = (props) => {
       .then(async (res) => {
         if (res.data.status === "success") {
           message.success("Login successful!")
-          cookies.save('jwt', res.data.token)
-
+          cookies.save('jwt', res.data.token);
+          localStorage.setItem('token',res.data.token);
           const valided = await validUser(url);
            
           if (valided.status === "success") {
-            
-            setTimeout(async () => {
-              await histor.push("/home")
+            setTimeout( () => {
+              histor.push("/home")
               window.location.reload()
             }, 2000)
           }

@@ -243,10 +243,10 @@ const HomeContent = () => {
 
                             <Col span={8} className="box-project">
                                 <Card className="card-pro"
-                                    key={project.id}
+                                    key={project._id}
                                     title={project.projectName}
                                     bordered={false}
-                                    extra={<a href={"/project/" + project._id}>More</a>}
+                                    extra={<Link to={`project/${project._id}`}>More</Link>}
                                     style={{ width: 300 }}>
                                     <Row >
                                         <Col >
