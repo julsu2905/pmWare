@@ -7,14 +7,10 @@ const User = require("../models/userModel");
 const Project = require("../models/projectModel");
 const Task = require("../models/taskModel");
 
-
 exports.createProject = catchAsync(async (req, res, next) => {
-  console.log(req.body)
-  const token = await req.body.jwt
-  const decoded = await promisify(jwt.verify)(
-    token,
-    process.env.JWT_SECRET
-  );
+  console.log(req.body);
+  const token = await req.body.jwt;
+  const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
   let project = await Project.findOne({
     projectName: req.body.projectName,
     active: true,
@@ -112,7 +108,10 @@ exports.deleteProject = catchAsync(async (req, res, next) => {
     return next(new AppError("No document found with that ID", 404));
   }
 
-  res.redirect("/home");
+  res.status(200).json({
+    status: "success",
+    data: null
+  });
 });
 
 
