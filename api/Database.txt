@@ -1,0 +1,1 @@
+DATABASE CONFIG IN .env FILE AND server.js
