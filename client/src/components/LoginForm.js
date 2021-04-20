@@ -20,7 +20,7 @@ const LoginForm = (props) => {
   }
 
   const login = (values) => {
-    const url = "http://127.0.0.1:9696/api/";
+    const url = "/api/";
     axios
       .post(url + 'login', values)
       .then(async (res) => {

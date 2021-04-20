@@ -81,7 +81,7 @@ export default function Project() {
   const [columns, setColumns] = useState(columnsFromBackend);
 
   useEffect(() => {
-    const url = "http://127.0.0.1:9696/api/project/" + id;
+    const url = "/api/project/" + id;
     axios.get(url).then(res =>{
       setTasks(res.data.data.projectTasks)
     })
