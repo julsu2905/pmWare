@@ -22,5 +22,6 @@ router
 router.route("/username").post(userController.getUsername)
 router.route("/userproject").post(userController.getUserProjects)
 router.route("/project").post(projectController.createProject)
-
+router.get('/project/:id',projectController.getProject)
+router.delete('/project/:id',projectController.deleteProject)
 module.exports = router;

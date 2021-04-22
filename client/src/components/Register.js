@@ -52,7 +52,7 @@ const RegisterForm = () => {
 
 
   const register = (values) => {
-    const url = "http://127.0.0.1:9696/api/user"
+    const url = "/api/user"
     axios.post(url, values).then((res) => {
       message.success("Register successfully!")
       setTimeout(() => { history.push('/login') }, 2000)

@@ -33,8 +33,8 @@ function App() {
           <Route path="/register">
             <RegisterForm />
           </Route>
-          <Route  path="/project">
-            <Project />
+          <Route  path="/project/:id">
+            <Project currentUser={currentUser}/>
           </Route>
           <Route path="/profile">
             <UserProfile />

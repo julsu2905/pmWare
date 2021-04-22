@@ -1,38 +1,15 @@
-import React, { useState } from "react";
+import React, { useState ,useEffect} from "react";
 import {DragDropContext, Droppable, Draggable} from 'react-beautiful-dnd';
 import {v4 as uuid} from "uuid"; 
-import { Layout, Row, Col,Divider } from "antd";
+import { Layout, Row, Col,Divider,Button } from "antd";
 import "./component-css/Project.css";
 import ModalAddmembers from './components-child/ModalAddmembers'
 /* import Column from "antd/lib/table/Column"; */
+import ModalCreateTask from './components-child/ModalCreateTask'
+import { useParams } from "react-router-dom";
+import axios from "axios";
 
 //drop and Drag
-const itemsFromBackend = [
-  { id: uuid(), content: "Cart Title 1" },
-  { id: uuid(), content: "Cart Title 2" },
-  { id: uuid(), content: "Cart Title 3" },
-  { id: uuid(), content: "Cart Title 4" },
-  { id: uuid(), content: "Cart Title 5" }
-];
-
-const columnsFromBackend = {
-  [uuid()]: {
-    name: "Requested",
-    items: itemsFromBackend
-  },
-  [uuid()]: {
-    name: "To do",
-    items: []
-  },
-  [uuid()]: {
-    name: "In Progress",
-    items: []
-  },
-  [uuid()]: {
-    name: "Done",
-    items: []
-  }
-};
 
 const onDragEnd = (result, columns, setColumns) => {
   if (!result.destination) return;
@@ -60,6 +37,7 @@ const onDragEnd = (result, columns, setColumns) => {
     const column = columns[source.droppableId];
     const copiedItems = [...column.items];
     const [removed] = copiedItems.splice(source.index, 1);
+    
     copiedItems.splice(destination.index, 0, removed);
     setColumns({
       ...columns,
@@ -70,21 +48,63 @@ const onDragEnd = (result, columns, setColumns) => {
     });
   }
 };
+  const columnsFromBackend = {
+    [uuid()]: {
+      name: "Assigned",
+      name:'assigned',
+      items:[]
+    },
+    [uuid()]: {
+      name: "In Progress",
+      id:'working',
+      items:[]
+
+    },
+    [uuid()]: {
+      name: "Pending",
+      id:'pending',
+      items:[]
+
+    },
+    [uuid()]: {
+      name: "Done",
+      id:'done',
+      items:[]
+
+    }
+  };
+
  
 export default function Project() {
+  const [tasks,setTasks]= useState([]);
+  const {id} = useParams();
   const [columns, setColumns] = useState(columnsFromBackend);
+
+  useEffect(() => {
+    const url = "/api/project/" + id;
+    axios.get(url).then(res =>{
+      setTasks(res.data.data.projectTasks)
+    })
+  }, []);
   return (
     <div style={{ display: "flex", justifyContent: "center", height: "100%" }}>
       <DragDropContext
         onDragEnd={result => onDragEnd(result, columns, setColumns)}
       >
+        <ModalCreateTask style={{
+          display:"flex",
+          justifyContent:"center"
+        }} />
+       
         {Object.entries(columns).map(([columnId, column], index) => {
           return (
             <div
               style={{
                 display: "flex",
                 flexDirection: "column",
-                alignItems: "center"
+                alignItems: "center",
+                fontFamily:"sans-serif",
+                fontSize:"16px"
               }}
               key={columnId}
             >
@@ -98,20 +118,21 @@ export default function Project() {
                         ref={provided.innerRef}
                         style={{
                           background: snapshot.isDraggingOver
-                            ? "lightblue"
+                            ? "#9FF781"
                             : "lightgrey",
                           padding: 4,
                           width: 250,
                           minHeight: 500
                         }}
                       >
-                        {column.items.map((item, index) => {
+                        {tasks.map((item, index) => {
+                          if(item.status==column.id)
                           return (
                             <Draggable
                               key={item.id}
                               draggableId={item.id}
                               index={index}
-                            >
+                            > 
                               {(provided, snapshot) => {
                                 return (
                                   <div
@@ -137,7 +158,8 @@ export default function Project() {
                                       <p>
                                         Lorem ipsum dolor sit amet
                                       </p>
-                                      <ModalAddmembers/>
+                                   <ModalAddmembers/>
+                             
 
                                   </div>
                                 );

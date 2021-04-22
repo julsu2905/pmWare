@@ -27,7 +27,7 @@ const Navigator = (props) => {
   useEffect(async () => {
     let token = cookies.load('jwt')
     if (token) {
-      const url = "http://127.0.0.1:9696/api/";
+      const url = "/api/";
       const response = await axios.post(url + 'username', { jwt: cookies.load('jwt') }).catch(err => {
         message.error(err)
       })
