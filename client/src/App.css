@@ -15,17 +15,26 @@
   color: #fff;
   background: #336b87;
 }
-.ant-layout-footer h1{
+/* .ant-layout-footer h1{
   font-size: 1em;
   padding-top: 5px;
   color : #222;
   font-weight: bolder;
   font-family: cursive;
 }
-
+ */
 .ant-layout-content {
-  
-  min-height: 100vh;
-  color: white;
-  background: #DDD;
+
+  background-size: cover;
+  min-width: 100vh;
+  width: 100%;
+  background: white;
+  /* background-image: url(./img/background.jpg); */
+  /* Permalink - use to edit and share this gradient: https://colorzilla.com/gradient-editor/#b2e1ff+0,66b6fc+100;Blue+3D+%236 */
+/* background: rgb(178,225,255);
+background: -moz-linear-gradient(left,  rgba(178,225,255,1) 0%, rgba(102,182,252,1) 100%);
+background: -webkit-linear-gradient(left,  rgba(178,225,255,1) 0%,rgba(102,182,252,1) 100%); 
+background: linear-gradient(to right,  rgba(178,225,255,1) 0%,rgba(102,182,252,1) 100%); 
+filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b2e1ff', endColorstr='#66b6fc',GradientType=1 ); */
+
 }

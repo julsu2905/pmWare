@@ -10,7 +10,8 @@ import LoginForm from "./components/LoginForm";
 import RegisterForm from "./components/Register";
 import Project from "./components/Project";
 import UserProfile from "./components/UserProfile";
-const { Header, Footer, Sider, Content } = Layout;
+import Footer from "./components/Footer";
+const { Header , Sider, Content } = Layout;
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
@@ -41,7 +42,6 @@ function App() {
           </Route>
         </Content>
         <Footer>
-          <h1>Copyright © 2021 SweetBoyDEV</h1>
         </Footer>
       </Layout>
     </Router>

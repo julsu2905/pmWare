@@ -1,13 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
-import { Col, Menu, Row, Input, message } from "antd";
+import { Col, Menu, Row, Input, message, Button, Space } from "antd";
 import { HomeOutlined, UserOutlined, UserAddOutlined } from "@ant-design/icons";
 import "./component-css/Navigator.css";
 import cookies from "react-cookies"
 import axios from "axios"
+import logoVN from "../img/iconVN.png"
 const { Search } = Input;
 
 const Navigator = (props) => {
+ 
   const history = useHistory();
   const [current, setCurrent] = useState("home");
   const [username, setUsername] = useState("");
@@ -37,20 +39,8 @@ const Navigator = (props) => {
 
   return (
     <Row className="nav-wrapper">
-      <Col span={6} className="left-nav">
-        <Menu
-          className="navigator"
-          onClick={handleClick}
-          selectedKeys={[current]}
-          mode="horizontal"
-        >
-          <Menu.Item key="home" icon={<HomeOutlined />}>
-            Trang Chủ
-          </Menu.Item>
-        </Menu>
-      </Col>
-      <Col className="logo" offset={2} span={3}>
-        <Link onClick={() => history.push("/")} to="/">
+      <Col span={10} className="left-nav">
+      <Link onClick={() => history.push("/")} to="/">
           <img
             key="home"
             alt="logo-home"
@@ -60,15 +50,7 @@ const Navigator = (props) => {
           ></img>
         </Link>
       </Col>
-      <Col className="search-bar-wrapper" span={4}>
-        <Search
-          className="search-bar"
-          placeholder="Search..."
-          onSearch={onSearch}
-          allowClear
-        />
-      </Col>
-      <Col span={8} className="right-nav">
+      <Col span={14} className="right-nav">
         <Menu
           className="navigator"
           onClick={handleClick}
@@ -76,14 +58,24 @@ const Navigator = (props) => {
           mode="horizontal"
         >
           <Menu.Item key="searchbar"></Menu.Item>
+          <Menu.Item key="template">Mẫu dự án</Menu.Item>
+          <Menu.Item key="contact">Liên hệ</Menu.Item>
+          <Menu.Item key="price">Bảng giá</Menu.Item>
+          
           {cookies.load('jwt') === undefined ? (
             <>
               <Menu.Item key="login" icon={<UserOutlined />}>
+               
                 Đăng nhập
+               
               </Menu.Item>
+              
               <Menu.Item key="register" icon={<UserAddOutlined />}>
+              <Button type="primary">
                 Đăng ký
+                </Button>
               </Menu.Item>
+             
             </>
           ) : (
             <>
@@ -92,7 +84,14 @@ const Navigator = (props) => {
               </Menu.Item>
             </>
           )}
+
+          <select className="language" style={{marginLeft:"20px"}}>
+              <option selected>VI</option>
+              <option value="english">EN</option>   
+          </select>
+     
         </Menu>
+      
       </Col>
     </Row>
   );

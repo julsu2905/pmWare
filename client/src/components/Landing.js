@@ -1,112 +1,142 @@
-import { Col, Layout, Row } from "antd";
+import { Col, Layout, Row, Input, Space } from "antd";
 import React, { useState } from "react";
-import './component-css/Landing.css';
+import "./component-css/Landing.css";
+import { Link } from "react-router-dom";
+import CarouselLanding from "./components-child/CarouselLanding";
+import feature_1 from "../img/feature_1.png";
+import feature_2 from "../img/feature_2.png";
+import feature_3 from "../img/feature_3.png";
+import feature_4 from "../img/feature_4.jpg";
 const { Content } = Layout;
 
 const Landing = () => {
   return (
     <Row>
       <Col>
-          <Row className="banner-wrapper">
-          <Col className="slogan-wrapper" span={16} offset={6}> 
-            <Row>
-              <Col>
-                <h2 className="slogan">
-                  Listen To The Many - Not The Money
-                </h2>
-              </Col>
-            </Row>
-          </Col>
-        </Row>
-        <Row className="news">
-          <Col>
-            <div className="work-list">
-              <div className="box">
-                <div className="img-box">
-                  <div className="cover-img">
-                    <img src="./images/trello.jpg" alt="login-logo" />
-                  </div>
-                  <div className="cover-content">
-                    <div className="content">
-                      <p>Các bảng và danh sách và thẻ của Trello cho phép các nhóm tổ chức
-                        và ưu tiên các dự án một cách vui vẻ linh hoạt và xứng đáng.</p>
-                    </div>
-                  </div>
-                </div>
+        <Row className="slogan" style={{ textAlign: "center" }}>
+          <Col span={12}>
+            <div className="slogan-content">
+              <div>
+                <h1>Ý Tưởng Thành Hiện Thực </h1>
+                <p>
+                  Trực quan hoá chiến lược, kế hoạch và tiến độ qua các báo cáo
+                  cùng nhiều tương tác đúng thời điểm giúp cho sự cộng tác gắn
+                  kết, tăng hiệu quả và năng lực đội ngũ
+                </p>
               </div>
-              <div className="box">
-                <div className="img-box">
-                  <div className="cover-img">
-                    <img src="./images/teamwork.jpg" alt="login-logo"></img>
-                  </div>
-                  <div className="cover-content">
-                    <div className="content">
-                      <p>Todolist giúp các nhóm làm việc có tính hợp tác hơn và làm được
-                nhiều hơn. </p> 
+              <div className="quick-sign-up">
+                <form>
+                  <Space>
+                    <div class="page">
+                      <label class="field field_v3">
+                        <input
+                          class="field__input"
+                          placeholder="abc@gmail.com"
+                        />
+                        <span class="field__label-wrap">
+                          <span class="field__label">E-mail</span>
+                        </span>
+                      </label>
                     </div>
-                  </div>
-                </div>
-              </div>
-              <div className="box">
-                <div className="img-box">
-                  <div className="cover-img">
-                    <img src="./images/working-bg.jpg" alt="login-logo"></img>
-                  </div>
-                  <div className="cover-content">
-                    <div className="content">
-                      <p>Giúp kiểm soát tiến độ làm việc của từng công việc một cách hệ thống và hiệu quả nhất</p>
-                    </div>
-                  </div>
-                </div>
+                    <Link to ="register">
+                    <button data-hover="click me!">
+                      <div>GET IT FREE</div>
+                    </button>
+                    </Link>
+                  </Space>
+                </form>
               </div>
             </div>
           </Col>
-        </Row>
-        <Row >
-          <Col>
-              <div className="grow">
-                <div className="text-content">
-                  <h1>
-                    Project Power
-                  </h1>
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus tempora asperiores quasi distinctio, itaque dolorem sunt 
-                    in incidunt vitae, odit at dignissimos tempore perspiciatis consequuntur odio, nostrum quod adipisci repellendus!
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus tempora asperiores quasi distinctio, itaque dolorem sunt 
-                    in incidunt vitae, odit at dignissimos tempore perspiciatis consequuntur odio, nostrum quod adipisci repellendus!
-                  </p>
-                </div>
-                <div className="img-content">
-                  <img src="./images/business.png" alt="Grafica"/>
-                </div>
-              </div>
+          <Col span={12}>
+            <div className="imgslogan">
+              <img src="./images/imgslogan1.jpg" alt="login-logo" />
+            </div>
           </Col>
         </Row>
-        <Row >
-          <Col>
-              <div className="smartphone">
-                <div className="text-content">
-                  <h1>
-                    Convenience
-                  </h1>
-                  <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus tempora asperiores quasi distinctio, itaque dolorem sunt 
-                    in incidunt vitae, odit at dignissimos tempore perspiciatis consequuntur odio, nostrum quod adipisci repellendus!
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Voluptatibus tempora asperiores quasi distinctio, itaque dolorem sunt 
-                    in incidunt vitae, odit at dignissimos tempore perspiciatis consequuntur odio, nostrum quod adipisci repellendus!
-                  </p>
-                </div>
-                <div className="img-content">
-                  <img src="./images/smartphone.png" alt="Grafica"/>
-                </div>
-              </div>
-          </Col>
+        <CarouselLanding />
+        <Row>
+          <Col></Col>
         </Row>
+        <div className="slogan-content2">
+          <div>
+            <h1>Đơn Giản Hóa Công Việc</h1>
+            <p>
+              Hỗ trợ nhiều loại mẫu dự án cho nhiều lĩnh vực giúp bắt đầu nhanh
+              và dễ dàng
+            </p>
+          </div>
+          <div className="benefit">
+            <Row>
+              <Col span={6}>
+                <Link to="/quanly">
+                  <div className="case-study">
+                    <img src={feature_1} />
+                    <div>
+                      <h1>Quản lý</h1>
+                      <p>
+                        Người chịu trách nhiệm của mỗi task, thời hạn của công
+                        việc, mối quan hệ của task đó so với toàn bộ tiến độ
+                        công việc
+                      </p>
+                    </div>
+                  </div>
+                </Link>
+              </Col>
+              <Col span={6}>
+                <Link to="/tienloi">
+                  <div className="case-study">
+                    <img src={feature_2} />
+                    <div>
+                      <h1>Dễ dàng</h1>
+                      <p>
+                        Lựa chọn nhiều loại dự án với các mục đích khác nhau.{" "}
+                      </p>
+                      <p>
+                        Lên kế hoạch, phân chia nhiệm vụ cho các thành viên.{" "}
+                      </p>
+                    </div>
+                  </div>
+                </Link>
+              </Col>
+              <Col span={6}>
+                <Link to="/phamvi">
+                  <div className="case-study">
+                    <img src={feature_3} />
+                    <div>
+                      <h1>Phạm vi</h1>
+                      <p>Có thể sử dụng trên toàn thế giới.</p>
+                      <p> Viết trên nền tảng Website và ứng dụng di động.</p>
+                    </div>
+                  </div>
+                </Link>
+              </Col>
+              <Col span={6}>
+                <Link to="/hotro">
+                  <div className="case-study">
+                    <img src={feature_4} />
+                    <div>
+                      <h1>Nhận sự hỗ trợ</h1>
+                      <p>
+                        Sự hỗ trợ từ cộng đồng dùng chung ứng dụng và đội ngũ có
+                        kinh nghiệm để có thể trao đổi kinh nghiệm làm việc, tổ
+                        chức dự án.
+                      </p>
+                    </div>
+                  </div>
+                </Link>
+              </Col>
+            </Row>
+          </div>
+        </div>
+        <div className="slogan-content2">
+        <div>
+        Truyền cảm hứng đến đội ngũ
+           <input />
+          </div>
+        </div>
       </Col>
     </Row>
-
   );
 };
 export default Landing;
-
-
