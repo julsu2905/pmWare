@@ -65,11 +65,8 @@ const Navigator = (props) => {
           {cookies.load('jwt') === undefined ? (
             <>
               <Menu.Item key="login" icon={<UserOutlined />}>
-               
                 Đăng nhập
-               
               </Menu.Item>
-              
               <Menu.Item key="register" icon={<UserAddOutlined />}>
               <Button type="primary">
                 Đăng ký

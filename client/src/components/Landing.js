@@ -7,11 +7,15 @@ import feature_1 from "../img/feature_1.png";
 import feature_2 from "../img/feature_2.png";
 import feature_3 from "../img/feature_3.png";
 import feature_4 from "../img/feature_4.jpg";
+import { SolarSystemLoading } from 'react-loadingg';
+import Loading from "./Loading";
 const { Content } = Layout;
 
 const Landing = () => {
   return (
+    
     <Row>
+  <Loading />
       <Col>
         <Row className="slogan" style={{ textAlign: "center" }}>
           <Col span={12}>
